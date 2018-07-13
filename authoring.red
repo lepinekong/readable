@@ -1,5 +1,5 @@
 Red [
-    Title: ".system.user.apps.authoring.library.red"
+    Title: "authoring.red"
     Origin: https://gist.github.com/lepinekong/7574892bfefe7e53e7bd4dd4759f30f8
     Builds: [
         0.0.0.1 {Initial copy}
@@ -13,6 +13,8 @@ Red [
         v2.0.0: {+ .copy-file}
     ]
 ]
+
+set to-word rejoin ["--" ">"] none
 
 ->: .->: .=>: =>: ""
 
