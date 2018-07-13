@@ -7,7 +7,7 @@
         0.0.0.1 {embed in html and caching}
     ]
     Iterations: [
-        0.0.0.3.1 {init caching}
+        0.0.0.3.1 {lib: https://readable.red/authoring.red}
     ]
     History: [
         v1.0.0: {initial version}
