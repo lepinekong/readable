@@ -173,8 +173,9 @@ unless ((REMOTE-LIB = false) and (exists? lib: %.system.user.apps.authoring.libr
     ; lib: get-github-url github-url-entry %.system.user.apps.authoring.library.red
     
     ;lib: https://readable.red/authoring.red
-    lib: load-thru https://readable.red/authoring.red
-    print ["load-thru" https://readable.red/authoring]
+    lib: https://readable.red/authoring.red
+    load-thru lib
+
 ]
 ;do read lib
 do lib
