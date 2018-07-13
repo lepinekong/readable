@@ -75,7 +75,7 @@
     Title: "ReAdABLE.Human.Format.lib.red"
     Description: {Presenting the ReAdABLE Human Format written in its own format for highly productive aspiring Writer}
     Builds: [
-        0.0.0.3 {caching}
+        0.0.0.3 {caching from redlang.red}
         0.0.0.2 {inject in html}
         0.0.0.1 {embed in html and caching}
     ]
@@ -173,8 +173,8 @@ unless ((REMOTE-LIB = false) and (exists? lib: %.system.user.apps.authoring.libr
     ; lib: get-github-url github-url-entry %.system.user.apps.authoring.library.red
     
     ;lib: https://readable.red/authoring.red
-    lib: https://readable.red/authoring.red
-    load-thru lib
+    lib: load-thru https://redlang.red/authoring.red
+    ;load-thru lib
 
 ]
 ;do read lib

@@ -2,11 +2,12 @@
     Title: "ReAdABLE.Human.Format.lib.red"
     Description: {Presenting the ReAdABLE Human Format written in its own format for highly productive aspiring Writer}
     Builds: [
-        0.0.0.3 {caching}
+        0.0.0.3 {caching from redlang.red}
         0.0.0.2 {inject in html}
         0.0.0.1 {embed in html and caching}
     ]
     Iterations: [
+        0.0.0.3.2 {init caching}
         0.0.0.3.1 {lib: https://readable.red/authoring.red}
     ]
     History: [
@@ -84,6 +85,8 @@
 ; PREAMBLE
 ;===========================================================================================
 
+probe [0.0.0.3.2 {init caching}]
+
 ; for html embed
 set to-word rejoin ["--" ">"] none ; for embedding red code within html
 
@@ -95,9 +98,14 @@ unless ((REMOTE-LIB = false) and (exists? lib: %.system.user.apps.authoring.libr
     ; do read https://gist.githubusercontent.com/lepinekong/7574892bfefe7e53e7bd4dd4759f30f8/raw/2dec6c1f92fe1834632d998ffb831539caa23d63/.github.lib.red
     ; github-url-entry: https://gist.github.com/lepinekong/7574892bfefe7e53e7bd4dd4759f30f8
     ; lib: get-github-url github-url-entry %.system.user.apps.authoring.library.red
-    lib: https://readable.red/authoring.red
+    
+    ;lib: https://readable.red/authoring.red
+    lib: load-thru https://redlang.red/authoring.red
+    ;load-thru lib
+
 ]
-do read lib
+;do read lib
+do lib
 
 ;launched script path (first one may be different from current executing script)
 script-path: system/options/script
