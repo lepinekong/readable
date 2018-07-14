@@ -180,7 +180,7 @@ unless ((REMOTE-LIB = false) and (exists? lib: %.system.user.apps.authoring.libr
     either find to-refresh lib-url [
         lib: load-thru/update https://redlang.red/authoring.red
         latest-refresh-date: now/utc
-        mkdir %config/
+        make-dir %config/
         config: load config-url
         ?? config
         ;save %config/cache.config.read 
