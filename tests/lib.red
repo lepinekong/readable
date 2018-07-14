@@ -7,6 +7,8 @@
         0.0.0.1 {embed in html and caching}
     ]
     Iterations: [
+        0.0.0.3.4 {cache.config.red}        
+        0.0.0.3.3 {caching redlang.red/authoring.red}
         0.0.0.3.2 {init caching}
         0.0.0.3.1 {lib: https://readable.red/authoring.red}
     ]
@@ -100,6 +102,8 @@ unless ((REMOTE-LIB = false) and (exists? lib: %.system.user.apps.authoring.libr
     ; lib: get-github-url github-url-entry %.system.user.apps.authoring.library.red
     
     ;lib: https://readable.red/authoring.red
+    do https://readable.red/config/cache.config.read
+    ?? to-refresh
     lib: load-thru https://redlang.red/authoring.red
     ;load-thru lib
 
