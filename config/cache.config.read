@@ -3,5 +3,7 @@ Red [
 ]
 
 to-refresh: [
-    https://redlang.red/authoring.red
+    14-Jul-2018/1:21:05 https://redlang.red/authoring.red
 ]
+
+latest-refresh-date: 'to-update
