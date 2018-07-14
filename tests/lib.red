@@ -96,21 +96,19 @@ set to-word rejoin ["--" ">"] none ; for embedding red code within html
 REMOTE-LIB: false
 
 unless ((REMOTE-LIB = false) and (exists? lib: %.system.user.apps.authoring.library.red)) [
-    ; print "Loading remote lib"
-    ; do read https://gist.githubusercontent.com/lepinekong/7574892bfefe7e53e7bd4dd4759f30f8/raw/2dec6c1f92fe1834632d998ffb831539caa23d63/.github.lib.red
-    ; github-url-entry: https://gist.github.com/lepinekong/7574892bfefe7e53e7bd4dd4759f30f8
-    ; lib: get-github-url github-url-entry %.system.user.apps.authoring.library.red
-    
-    ;lib: https://readable.red/authoring.red
-    do config-url: https://readable.red/config/cache.config.read
+
     lib-url: https://redlang.red/authoring.red
+    do config-url: https://readable.red/config/cache.config.read
+    
     either find to-refresh lib-url [
         lib: load-thru/update https://redlang.red/authoring.red
         latest-refresh-date: now/utc
         make-dir %config/
         config: load config-url
         ?? config
-        ;save %config/cache.config.read 
+        config/latest-refresh-date: now/utc
+        ?? config
+        save %config/cache.config.read config
     ][
         lib: load-thru https://redlang.red/authoring.red
     ]
