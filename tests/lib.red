@@ -109,6 +109,8 @@ unless ((REMOTE-LIB = false) and (exists? lib: %.system.user.apps.authoring.libr
         config/latest-refresh-date: now/utc
         ?? config
         save %config/cache.config.read config
+        check: load %config/cache.config.read
+        ?? check
     ][
         lib: load-thru https://redlang.red/authoring.red
     ]
