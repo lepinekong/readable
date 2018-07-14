@@ -104,7 +104,7 @@ unless ((REMOTE-LIB = false) and (exists? lib: %.system.user.apps.authoring.libr
     ;lib: https://readable.red/authoring.red
     do config-url: https://readable.red/config/cache.config.read
     lib-url: https://redlang.red/authoring.red
-    either find? to-refresh lib-url [
+    either find to-refresh lib-url [
         lib: load-thru/update https://redlang.red/authoring.red
         latest-refresh-date: now/utc
         mkdir %config/
