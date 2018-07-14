@@ -1,1 +1,3 @@
-to-refresh: false
+to-refresh: [
+    https://redlang.red/authoring.red
+]
