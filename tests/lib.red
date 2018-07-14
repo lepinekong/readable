@@ -104,12 +104,22 @@ unless ((REMOTE-LIB = false) and (exists? lib: %.system.user.apps.authoring.libr
     either found: find to-refresh lib-url [
         to-refresh-date: pick to-refresh (index? found) - 1
         ?? to-refresh-date
-        lib: load-thru/update https://redlang.red/authoring.red
-        latest-refresh-date: now/utc
-        make-dir %config/
-        config: load config-url
-        config/latest-refresh-date: now/utc
-        save %config/cache.config.read config
+        either exists? local-config-file: %config/cache.config.read [
+            local-config: load local-config-file
+            previous-latest-refresh-date: local-config/latest-refresh-date
+            ?? previous-latest-refresh-date
+            if (local-config/latest-refresh-date < to-refresh-date) [
+                print "TODO:"
+            ]
+        ][
+            lib: load-thru/update https://redlang.red/authoring.red
+            latest-refresh-date: now/utc
+            make-dir %config/
+            config: load config-url
+            config/latest-refresh-date: now/utc
+            save %config/cache.config.read config
+        ]
+
     ][
         lib: load-thru https://redlang.red/authoring.red
     ]
