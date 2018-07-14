@@ -7,6 +7,7 @@
         0.0.0.1 {embed in html and caching}
     ]
     Iterations: [
+        0.0.0.3.5 {compare latest-refresh-date to refresh-date}   
         0.0.0.3.4 {cache.config.red}        
         0.0.0.3.3 {caching redlang.red/authoring.red}
         0.0.0.3.2 {init caching}
@@ -100,17 +101,15 @@ unless ((REMOTE-LIB = false) and (exists? lib: %.system.user.apps.authoring.libr
     lib-url: https://redlang.red/authoring.red
     do config-url: https://readable.red/config/cache.config.read
     
-    either find to-refresh lib-url [
+    either found: find to-refresh lib-url [
+        to-refresh-date: pick to-refresh (index? found) - 1
+        ?? to-refresh-date
         lib: load-thru/update https://redlang.red/authoring.red
         latest-refresh-date: now/utc
         make-dir %config/
         config: load config-url
-        ?? config
         config/latest-refresh-date: now/utc
-        ?? config
         save %config/cache.config.read config
-        check: load %config/cache.config.read
-        ?? check
     ][
         lib: load-thru https://redlang.red/authoring.red
     ]
