@@ -1,4 +1,4 @@
-    Red [
+Red [
     Title: "ReAdABLE.Human.Format.lib.red"
     Description: {Presenting the ReAdABLE Human Format written in its own format for highly productive aspiring Writer}
     Builds: [
