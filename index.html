@@ -1,15 +1,3 @@
-<!--
-Red []
-; just to avoid bug with do read
-
-<title>
-	index: ""
-</title>
-set to-word rejoin ["--" ">"] "index loading" 
-__red-code__: load https://readable.red/index.red  
-print {"index loaded" }  
--->
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -82,11 +70,10 @@ print {"index loaded" }
 </div>
 </body>
     
-
 <!--
-    <execute>
-        do __red-code__
-        print {"index executed" }  
-    </execute>
+Red []
+; for html embed
+set to-word rejoin ["--" ">"] none ; for embedding red code within html
+do https://readable.red/index.red
 -->
 
