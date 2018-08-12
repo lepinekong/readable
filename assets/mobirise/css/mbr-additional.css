@@ -1849,6 +1849,93 @@ body {
 .cid-r0x61kGytB .mbr-section-btn {
   text-align: left;
 }
+.cid-r0xO2QCmTC {
+  padding-top: 90px;
+  padding-bottom: 90px;
+  background-color: #f8f8f8;
+}
+.cid-r0xO2QCmTC .mbr-section-subtitle {
+  color: #767676;
+  text-align: center;
+  font-weight: 300;
+}
+.cid-r0xO2QCmTC .timeline-text-content {
+  padding: 2rem 2.5rem;
+  background: #e7e7e7;
+  margin-right: 2rem;
+  transition: all .4s;
+}
+.cid-r0xO2QCmTC .timeline-text-content p {
+  margin-bottom: 0;
+}
+.cid-r0xO2QCmTC .timeline-element {
+  margin-bottom: 50px;
+  position: relative;
+  word-wrap: break-word;
+  word-break: break-word;
+  display: -webkit-flex;
+  flex-direction: row;
+  -webkit-flex-direction: row;
+}
+.cid-r0xO2QCmTC .timeline-element:hover .timeline-text-content {
+  box-shadow: 0 7px 20px 0px rgba(0, 0, 0, 0.08);
+  transition: all .4s;
+}
+.cid-r0xO2QCmTC .reverse {
+  flex-direction: row-reverse;
+  -webkit-flex-direction: row-reverse;
+}
+.cid-r0xO2QCmTC .reverse .timeline-text-content {
+  margin-left: 2rem;
+  margin-right: 0;
+}
+.cid-r0xO2QCmTC .iconsBackground {
+  position: absolute;
+  left: 50%;
+  width: 60px;
+  height: 60px;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 50%;
+  display: inline-block;
+  background-color: #e7e7e7;
+  top: 20px;
+  margin-left: -30px;
+}
+.cid-r0xO2QCmTC .mbr-iconfont {
+  position: absolute;
+  text-align: center;
+  font-size: 35px;
+  display: inline-block;
+  z-index: 3;
+  top: 13px;
+  left: 13px;
+}
+.cid-r0xO2QCmTC .separline:before {
+  top: 20px;
+  bottom: 0;
+  position: absolute;
+  content: "";
+  width: 2px;
+  background-color: #e7e7e7;
+  left: calc(50% - 1px);
+  height: calc(100% + 4rem);
+}
+@media (max-width: 768px) {
+  .cid-r0xO2QCmTC .iconsBackground {
+    left: 1.5rem;
+  }
+  .cid-r0xO2QCmTC .separline:before {
+    left: calc(1.5rem - 1px);
+  }
+  .cid-r0xO2QCmTC .timeline-text-content {
+    margin-left: 3rem !important;
+    margin-right: 0 !important;
+  }
+  .cid-r0xO2QCmTC .reverse .timeline-text-content {
+    margin-right: 0 !important;
+  }
+}
 .cid-r0wc8ot3bV {
   padding-top: 30px;
   padding-bottom: 30px;
