@@ -42,7 +42,7 @@ Config: :.Config
 
 to-file: :.to-file
 
-.to-dir:  function[.dir [word! string! file! url! block! unset!] ][
+.to-dir:  function[.dir [word! string! file! url! block! unset!] /local ][
 
 	{
 
