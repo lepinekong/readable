@@ -11,7 +11,6 @@ Red [
         bind json-loader/object-name: [
 		string space #":" space (
 			emit either is-flat [
-				;to tag! current-value
 				to set-word! current-value
 			][
 				any [
