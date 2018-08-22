@@ -1,6 +1,6 @@
 Red []
 
-msg: {test index.1.html for redirect to https://}
+msg: {c to-readable.red}
 do https://quickrun.red/git-commit
 cd %../
 commit (msg)
