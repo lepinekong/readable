@@ -1,6 +1,6 @@
 Red []
 
-msg: {c to-readable.red}
+msg: {reorg folders}
 do https://quickrun.red/git-commit
 cd %../
 commit (msg)
