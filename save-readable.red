@@ -8,7 +8,7 @@ if not value? '.redlang [
 .redlang [read remove-last]
 
 
-save-readable: function [>block >file][
+save-readable: function [>file >block][
 
     out: copy ""
 
