@@ -8,14 +8,14 @@ if not value? '.redlang [
 .redlang [read remove-last]
 
 
-save-readable: function [>file >block][
+.save-readable: function [>file >block][
 
     out: copy ""
 
-    ;do https://redlang.red/read
+
     lines: .read/lines mold >block
     lines: skip lines 1
-    ;do https://redlang.red/remove-last
+
     remove-last lines
 
     forall lines [
@@ -27,3 +27,5 @@ save-readable: function [>file >block][
     write >file out
 
 ]
+
+save-readable: :.save-readable
