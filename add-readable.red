@@ -1,14 +1,32 @@
 Red [
     Title: ""
-    Note: {revert to 0.0.0.2.7}
+    Note: {when adding block remove first bracket}
+
 ]
+
+if not value? '.redlang [
+    do https://redlang.red
+]
+.redlang [get-block-content]
 
 .add-ReAdABLE: function[
     .readable-source [file! url! block!] 
     .key [string! word! path!] 
-    .value
+    .value [any-type!] ; 0.0.0.2.8
     /duplicate ; duplicate key authorized
+    /_build
+    /silent
 ][
+    >builds: [
+        0.0.0.2.10 {support for block value}
+    ]
+
+    if _build [
+        unless silent [
+            ?? >builds
+        ]
+        return >builds
+    ]
 
     {Example:
         T-2017.12.08-0001: [
@@ -38,13 +56,9 @@ Red [
     ]
 
     .append-key-value: function[.block [block!] .key [string! word! path!] .value][
-
-            ; append/only .block new-line (to-set-word .key) true
-            ; append/only .block .value
-            ; append/only .block new-line reduce [(to-set-word .key) .value] true ; 0.0.0.2.6
             append .block new-line reduce [(to-set-word .key) .value] true ; 0.0.0.2.7
             return .block
-    ] 
+    ]
 
     key-value: false
     unless duplicate [
@@ -52,7 +66,10 @@ Red [
     ]
 
     either key-value [ ; 0.0.0.1.2: if key exists do not create duplicate key unless specified
-        append key-value new-line .value true
+        if block? .value [
+            .value: .get-block-content .value ; 0.0.0.2.8 if value block type
+        ]
+        append key-value new-line (to-block .value) true
     ][
         .append-key-value readable-block .key .value
     ]
