@@ -3,7 +3,7 @@ Red [
     Note: {revert to 0.0.0.1.7}
 ]
 
-Add-ReAdABLE: function[
+.add-ReAdABLE: function[
     .readable-source [file! url! block!] 
     .key [string! word! path!] 
     .value
@@ -62,3 +62,5 @@ Add-ReAdABLE: function[
         save (.readable-source) (readable-block)
     ]
 ]
+
+add-ReAdABLE: :.add-ReAdABLE
