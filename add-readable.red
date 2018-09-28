@@ -1,6 +1,6 @@
 Red [
     Title: ""
-    Note: {revert to 0.0.0.1.7}
+    Note: {revert to 0.0.0.2.7}
 ]
 
 .add-ReAdABLE: function[
