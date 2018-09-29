@@ -17,7 +17,9 @@ if not value? '.redlang [
     /_build
     /silent
 ][
+
     >builds: [
+        0.0.0.3.2 {support for favorites/bookmarks/documentaries/Finance key}
         0.0.0.2.10 {support for block value}
     ]
 
@@ -56,7 +58,17 @@ if not value? '.redlang [
     ]
 
     .append-key-value: function[.block [block!] .key [string! word! path!] .value][
-            append .block new-line reduce [(to-set-word .key) .value] true ; 0.0.0.2.7
+            if error? try [
+                append .block new-line reduce [(to-set-word .key) .value] true ; 0.0.0.2.7
+            ][
+                if (length? .value) = 1 [
+                    if block? .value/1 [
+                        .value: .value/1
+                    ]
+                ]
+                append (do .key) new-line .value true ; 
+            ]
+            
             return .block
     ]
 
