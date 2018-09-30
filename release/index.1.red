@@ -1,11 +1,84 @@
 Red [
-    Title: "ReAdABLE.Human.Format"
-    Description: {ReAdABLE Human Format Library}
-    GUID: #7475b7be-08ac-4a61-ad1d-eda9fcf5f50d
+    Title: "ReAdABLE.Human.Format.lib.red"
+    Description: {Presenting the ReAdABLE Human Format written in its own format for highly productive aspiring Writer}
     Builds: [
-        0.0.0.5.1.2 {Release}
+        0.0.0.3 {caching}
+        0.0.0.2 {inject in html}
+        0.0.0.1 {embed in html and caching}
     ]
+    Iterations: [
+        0.0.0.3.1 {init caching}
+    ]
+    History: [
+        v1.0.0: {initial version}
+        v1.1.0: {
+            - added .code and .text sections (.text is same as content)
+            - support multiple paragraphs with same labels
+        }      
+        v1.1.1: { added articles-types: [
+                    Article
+                    Book
+                    Index
+                    Summary               
+                    Glossary
+                    Tutorial
+                    Memento
+                    Troubleshooting
+                    Troubleshooting
+                    tip
+                    Tips
+                    How-to
+                    How.to
+                    Cheatsheet
+                    Faq
+                ]
+        }
+        v1.2.0: {Added utilities for workflow:
+            - .copy-files
+        }
+        v1.2.1: {added .quote}
+    ]
+    Todo: [
+        FIX: {
+            - code tabs are not well indented
+        }
+
+        FEATURE-REQUEST: {
+            - Automatically push to Github
+            - Automatically create categories folders on Github
+            - Automatically create tags on Github
+        }
+    ]
+
+    ReAdABLE-Human-Format: [
+        {
+            Article: [
+                Title: "Title of the article"
+                Sub-Title: {Sub-title of the article}
+                Paragraphs: [ ; optional paragraph is supported out of paragraphs
+                    Paragraph: [
+                        .title: [
+                            "Title for Paragraph P1"
+                            .mandatory: yes
+                        ] 
+                        .content: {Content for Paragraph P1}
+                        .text: {same as content}
+                        .code: {code}
+                        .image: http://optional.image-1.jpg
+                        .text: {multiple text instances supported}
+                    ]
+                    Paragraph: [
+                        .title: {anonymous paragraph with non-unique label}
+                    ]
+                    [
+                        .title: {anonymous paragraph with no label}
+                    ]
+                ]
+            ]   
+        }
+    ] 
 ]
+
 
 ;===========================================================================================
 ; PREAMBLE
@@ -35,9 +108,6 @@ either none? script-path [
     short-filename: .get-short-filename/wo-extension script-path
 ]
 
-if exists? %config/readable.config.red [
-    do %config/readable.config.red
-]
 
 ;===========================================================================================
 ; DATA
@@ -45,25 +115,62 @@ if exists? %config/readable.config.red [
 
 ; don't forget to toggle word-wrap in VSCode
 
-if not value? 'articles-types [
-    articles-types: [
-        Article
-        Tutorial
-        Documentation
-    ]
+; if no article has been loaded
+articles-types: [
+    Article
+    Articles
+    Message
+    Messages
+    Book
+    Books
+    Index
+    Indexes
+    Summary
+    Summaries
+    Glossary
+    Glossaries
+    Tutorial
+    Tutorials
+    Memento
+    Mementos
+    Snippet
+    Snippets
+    Bookmark
+    Bookmarks
+    Journal
+    Journals
+    Bug
+    Bugs
+    Issue
+    Issues
+    Feature
+    Features
+    Troubleshooting
+    Troubleshootings
+    Tips
+    How-To
+    How-Tos
+    Faq
+    Faqs    
+    Cheatsheet
+    Cheatsheets
+    Best-Practice
+    Best-Practices
+    Coding-Standard
+    Coding-Standards
+    Coding-Style
+    Coding-Styles
 ]
 
-; if no article has been loaded
-
 article?: false
-article?: false 
-foreach article-type articles-types [
+article?: false foreach article-type articles-types [
 	if value? article-type [
 		article?: true
 		article: get in system/words article-type 
 		break
 	]
 ]
+
 ;if  ((not value? 'Article) and (not value? 'Tutorial)) [
 if not article? [
     Article: [
@@ -320,6 +427,7 @@ if .spike [
 
 
 .markdown-gen: function [ /input <=input-file /output =>output-file [file! url! string! unset!]][
+
     condition: (not value? 'article) and (not value? 'tutorial)  
 
     either (condition) [
@@ -347,6 +455,7 @@ if .spike [
         ]
         
     ]  
+
     either output [
         =>output-file: .to-file =>output-file
     ][
@@ -358,6 +467,7 @@ if .spike [
         delete =>output-file
         print ["deleting..." =>output-file]
     ]
+
     use ["global .emit you don't need to touch"][
         ; start cloning global .emit function
         spec: spec-of :.emit
@@ -685,7 +795,6 @@ if .spike [
     ; -> [[.title: ...] [.title: ...]]
 
 
-
 ;--------------------------------------------------------------------------
     message-processing ; this is for notifying user
 ;--------------------------------------------------------------------------
@@ -703,15 +812,18 @@ if .spike [
 
             label: Paragraph-Content/1
             value: Paragraph-Content/2
+
             if (form label) = ".title" [
                 title: value
                 .paragraph-title title ; emit markdown for paragraph title
             ]
+
             if (((form label) = ".text" ) or ((form label) = ".content" )) [
                 content: value
                 .content content ; emit markdown content with code block when any
 
-            ]    
+            ]            
+
             if find (form label)  ".code" [
 
                 code-markup: {```}
@@ -730,6 +842,7 @@ if .spike [
                 ] 
                 .content content ; emit markdown content with code block when any   
             ]
+
             if find (form label)  ".quote" [
                 content: rejoin [
                     ">"
@@ -739,10 +852,12 @@ if .spike [
                 .content content ; emit markdown content with quote                   
             ]
 
+
             if (form label) = ".image" [
                 image: value
                 .image image ; emit markdown for embedding image    
             ]
+
             if (((form label) = ".link" ) or ((form label) = ".url" )) [
                 url: value
 
@@ -760,21 +875,18 @@ if .spike [
             if (((form label) = ".links" ) or ((form label) = ".urls" )) [
                 links-collection: value
                 .links links-collection ; emit markdown for embedding image    
-            ]     
+            ]                        
+
             if (form label) = ".youtube" [
                 you-tube-url-or-id: value
                 .youtube you-tube-url-or-id
-            ]  
+            ]                        
 
             Paragraph-Content: next Paragraph-Content
         ]        
 
     ]
 
-    print (it: .to-full-path =>output-file) ; print file output path for info
- 
-return it ; 0.0.0.5.01
-
-
-] 
+    print (.to-full-path =>output-file) ; print file output path for info
+]
 markdown-gen: :.markdown-gen
