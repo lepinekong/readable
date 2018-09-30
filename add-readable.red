@@ -57,10 +57,13 @@ if not value? '.redlang [
         readable-block: .readable-source
     ]
 
+    ; / ---------------------------------
     .append-key-value: function[.block [block!] .key [string! word! path!] .value][
             if error? try [
                 append .block new-line reduce [(to-set-word .key) .value] true ; 0.0.0.2.7
+                
             ][
+                
                 if (length? .value) = 1 [
                     if block? .value/1 [
                         .value: .value/1
@@ -71,6 +74,7 @@ if not value? '.redlang [
             
             return .block
     ]
+    ; // ---------------------------------
 
     key-value: false
     unless duplicate [
@@ -79,9 +83,9 @@ if not value? '.redlang [
 
     either key-value [ ; 0.0.0.1.2: if key exists do not create duplicate key unless specified
         if block? .value [
-            .value: .get-block-content .value ; 0.0.0.2.8 if value block type
+            append key-value new-line (.value/1) true
         ]
-        append key-value new-line (to-block .value) true
+        
     ][
         .append-key-value readable-block .key .value
     ]
