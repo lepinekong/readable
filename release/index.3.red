@@ -3,7 +3,8 @@ Red [
     Description: {ReAdABLE Human Format Library}
     GUID: #7475b7be-08ac-4a61-ad1d-eda9fcf5f50d
     Builds: [
-        0.0.0.5.6.1 {Html-Gen}
+        0.0.0.5.3.1 {Html-Gen alpha}
+        0.0.0.5.1.2 {Release}
     ]
 ]
 
@@ -329,7 +330,7 @@ if .spike [
     either (condition) [
 
         .default-input-file: %ReAdABLE.Human.Format.data.red
-        .default-output-file: %ReAdABLE.Human.Format.html
+        .default-output-file: %ReAdABLE.Human.Format.md
 
         unless input [
             <=input-file: .default-input-file
@@ -788,12 +789,16 @@ markdown-gen: :.markdown-gen
 
 
 .html-gen: function [ /input <=input-file /output =>output-file [file! url! string! unset!]][
+
+    >output-file: %ReAdABLE.Human.Format.html
+    >output-extension: ".html"
+
     condition: (not value? 'article) and (not value? 'tutorial)  
 
     either (condition) [
 
         .default-input-file: %ReAdABLE.Human.Format.data.red
-        .default-output-file: %ReAdABLE.Human.Format.html
+        .default-output-file: >output-file
 
         unless input [
             <=input-file: .default-input-file
@@ -818,7 +823,7 @@ markdown-gen: :.markdown-gen
     either output [
         =>output-file: .to-file =>output-file
     ][
-        =>output-file: .to-file reduce [short-filename ".html"]
+        =>output-file: .to-file reduce [short-filename >output-extension]
     ]
 
 
@@ -850,270 +855,25 @@ markdown-gen: :.markdown-gen
     ]
     use ["generic formatting functions you can customize"][
 
-        emit-title-level: function [.title .title-level][
-            title: .title
-            n: .title-level
-            title: .replace/all title  "    " ""
-            marker-start: rejoin ["<H" n ">"]
-            marker-finish: rejoin ["</H" n ">"]
-            ;repeat i n [append marker {#}]
-            emit [newline marker-start title marker-finish newline]  
-        ]
 
 
 
-        emit-title: function[.title][   
-            unless none? .title [
-                emit-title-level .title 1  
-            ]         
-        ]
-        .title: :emit-title
 
 
-        emit-sub-title: function[.title][
-
-            unless none? .title [
-                emit-title-level .title 2  
-            ]
-
-        ]
-        .sub-title: :emit-sub-title
 
 
-        emit-paragraph-title: function[.title][
-
-            unless ((none? .title) or (.title = "")) [
-                emit-title-level .title 3     
-            ]      
-        ]
-        .paragraph-title: :emit-paragraph-title
 
 
-        emit-image: function[image][
-
-            if find image "https://imgur.com" [
-                ; check extension if none add .png
-                if not find image ".png" [
-                    image: rejoin [image ".png"]
-                ]
-            ]
-            unless none? image [
-                emit [
-                    {<a href='} image {'>}{<img src='} image {'>}{</a>}
-                ]
-            ]            
-        ]
-        .image: :emit-image
 
 
-        emit-content: function [content][
-            content-block: copy []  
-            either find content {```} [
-                use [lines flag flag_line][
-                    
-                    lines: .read/lines content
-                    flag: false
-                    forall lines [
-                        line: lines/1
-                        i: index? lines
-                        if find line {```} [
-                            .replace/all line {```} "" ; 0.0.0.5.07
-                            .replace/all line  "    " ""
-                            flag: not flag; flag: false -> true
-                            either flag [
-                                line: rejoin [newline newline "<code>" line] ; 0.0.0.5.07
-                            ][
-                                append line newline
-                                append line newline
-                            ]
-                        ]
-                        either flag = true [
-                            .replace/all line  "                " ""
-                            append line newline
-                        ][
-                            .replace/all line  "    " ""
-                            line: rejoin [line "</code>"] ; 0.0.0.5.07
-                        ]
-                        append content-block line                   
-                    ]
-                ]
-
-                content: copy ""
-                forall content-block [
-                    i: index? content-block
-                    n: length? content-block
-                    
-                    append content content-block/1
-                    unless i = n [
-                        unless find content newline [
-                            append content newline
-                        ]
-                        
-                    ]
-                    
-                ]
-                
-            ][
-                content: .replace/all content  "    " ""
-            ]
-            content: rejoin ["<p>" content "</p>"]
-            emit content
-        ]
-        .content: :emit-content
 
 
-        youtube?: function[url][
-
-            either block? url [
-                foreach element url [
-                    try [
-                        if find element "youtube.com" [
-                            return true
-                        ]                        
-                    ]
-                ]
-            ][
-                if find url "youtube.com" [
-                    return true
-                ]
-            ]
-
-            return false
-        ]
 
 
-        normalize-url-block: function[title-with-url][
-
-            first-item: title-with-url/1
-            either url? first-item [
-                title: title-with-url/2
-                url: title-with-url/1
-            ][
-                title: title-with-url/1
-                url: title-with-url/2
-
-                if issue? url [
-                    url: rejoin [ (to-string url) (mold title-with-url/3)]
-                ]
-            ]   
-            return reduce [title url]         
-        ]
+           
 
 
-        emit-youtube: function[youtube-url-or-id [url! string! word! block!]][
 
-            YOUTUBE_WIDTH: 560
-            YOUTUBE_HEIGHT: 315
-
-            YOUTUBE_EMBED_URL_PREFIX: https://www.youtube.com/embed/
-
-
-            unless none? youtube-url-or-id [
-
-                title: none
-
-                either url? youtube-url-or-id [
-                    youtube-url: youtube-url-or-id
-                ][
-
-                    either not block? youtube-url-or-id [
-                        id: youtube-url-or-id
-                        youtube-url: rejoin [YOUTUBE_EMBED_URL_PREFIX id]
-                    ][
-                        set [title youtube-url] normalize-url-block youtube-url-or-id
-
-
-                    ]
-                    
-                ]
-                
-                either find youtube-url "/embed/" [
-                    youtube-embed-url: youtube-url-or-id
-                ][
-                    parse youtube-url [
-                        thru "v=" copy id to end
-                    ]
-                    youtube-embed-url: rejoin [YOUTUBE_EMBED_URL_PREFIX id]
-                ]
-
-                unless none? title [
-                    emit [title]
-                ]
-
-                emit [
-                    {<iframe width="} YOUTUBE_WIDTH {" height="} YOUTUBE_HEIGHT {" src="}
-                    youtube-embed-url
-                    {" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>}
-                ]                
-            ]
-        ]
-        .youtube: :emit-youtube               
-
-
-        emit-link: function[
-            url.or.title-with-url [url! file! path! block! none!] 
-            /no-bullet
-            /screen-copy
-            ][
-
-            if none? url.or.title-with-url [
-                return false
-            ]
-
-            url: url.or.title-with-url
-            title: url
-
-            if block? url.or.title-with-url [
-
-                url.or.title-with-url: normalize-url-block url.or.title-with-url
-
-                set [title url] url.or.title-with-url
-
-            ]
-
-            unless none? url.or.title-with-url  [
-
-                either not youtube? url [
-                    bullet: ""
-                    unless no-bullet [
-                        bullet: "- "
-                    ]
-
-                    emit [
-                        {<a href='} url {'>} title {</a>}
-                    ]
-                ][
-                    emit-youtube url
-                ]
-            ] 
-            
-
-        ]
-        .link: :emit-link
-
-
-        emit-links: function[links-collection][
-
-            foreach [title url] links-collection [
-
-                either not block? title [
-
-                    either ((not url? title) and (not file? title)) [
-                        url-block: reduce [title url]
-                        emit-link url-block ; reduce will convert to block type
-                    ][
-                        emit-link title
-                        emit-link url
-                    ]
-                    
-                ][
-                    emit-link title ; it's already a link block
-                    emit-link url
-                ]
-
-            ]
-        ]
-        .links: :emit-links
 
 
     ]
