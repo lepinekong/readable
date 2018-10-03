@@ -3,6 +3,7 @@ Red [
     Description: {ReAdABLE Human Format Library}
     GUID: #7475b7be-08ac-4a61-ad1d-eda9fcf5f50d
     Builds: [
+        0.0.0.5.3.1 {Html-Gen alpha}
         0.0.0.5.1.2 {Release}
     ]
 ]
