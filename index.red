@@ -49,7 +49,11 @@ if not value? 'articles-types [
     articles-types: [
         Article
         Tutorial
+        Memento
+        Glossary
         Documentation
+        Doc
+        Index
     ]
 ]
 
@@ -778,3 +782,238 @@ return it ; 0.0.0.5.01
 
 ] 
 markdown-gen: :.markdown-gen
+;===========================================================================================
+; PROGRAM
+;===========================================================================================
+
+
+.html-gen: function [ /input <=input-file /output =>output-file [file! url! string! unset!]][
+
+    >output-file: %ReAdABLE.Human.Format.html
+    >output-extension: ".html"
+
+    condition: (not value? 'article) and (not value? 'tutorial)  
+
+    either (condition) [
+
+        .default-input-file: %ReAdABLE.Human.Format.data.red
+        .default-output-file: >output-file
+
+        unless input [
+            <=input-file: .default-input-file
+        ]
+
+        unless output [
+            =>output-file: .default-output-file
+        ]
+
+        print ["reading" <=input-file "..."]
+        do read <=input-file
+    ][
+
+    ]
+
+    if not value? 'article [
+        if value? 'Tutorial [
+            System/words/Article: Tutorial
+        ]
+        
+    ]  
+    either output [
+        =>output-file: .to-file =>output-file
+    ][
+        =>output-file: .to-file reduce [short-filename >output-extension]
+    ]
+
+
+    if exists? =>output-file [
+        delete =>output-file
+        print ["deleting..." =>output-file]
+    ]
+    use ["global .emit you don't need to touch"][
+        ; start cloning global .emit function
+        spec: spec-of :.emit
+        body: body-of :.emit
+
+        ; attach body words meaning to same meaning as in local context of '=>output-file 
+        bind body '=>output-file 
+
+        emit: function spec body
+        ; end cloning global .emit function
+    ]
+    use ["alert messages you can customize"][
+        message-processing: function[][
+            .do-events/no-wait ; this is just to make console run smoother 
+            print "processing..."
+            .do-events/no-wait            
+        ]
+
+        refresh-screen: function[][
+            .do-events/no-wait 
+        ]
+    ]
+    use ["generic formatting functions you can customize"][
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+           
+
+
+
+
+
+    ]
+
+;-------------------------------------------------------------------------
+
+    {
+        Article: [
+            Title: "Title of the article"
+            Sub-Title: {Sub-title of the article}
+            Paragraphs: [
+                P1: [
+                    .title: "Title for Paragraph P1"
+                    .content: {Content for Paragraph P1}
+                    .image: http://optional.image-1.jpg
+                ]
+            ]
+        ]   
+    }    
+
+
+
+    title: .select Article 'Title ; extract title from Article
+    Sub-title: .select Article 'Sub-Title ; extract sub-title from Article
+    Paragraphs: .select Article 'Paragraphs ; extract all paragraphs from Articles
+    ;-> [P1: [.title: ...] P2: [.title: ...]
+
+    if none? Paragraphs [
+        Paragraphs: copy []
+        forall Article [
+
+            label: Article/1
+            value: Article/2
+
+            if block? value [
+                if set-word? label [
+                    append Paragraphs label
+                    append/only Paragraphs value
+                ]
+            ]
+        ]
+    ]
+    
+    ; oParagraphs: Object Paragraphs ; convert paragraphs to object for easing extraction with values-of
+    ; Paragraphs-blocks: values-of oParagraphs ; extract all paragraphs details without labels
+
+    Paragraphs-Blocks: extract/index Paragraphs 2 2
+
+    ; -> [[.title: ...] [.title: ...]]
+
+
+
+;--------------------------------------------------------------------------
+    message-processing ; this is for notifying user
+;--------------------------------------------------------------------------
+    .title title ; emit markdown for article's title
+
+    .sub-title sub-title ; emit markdown for article's sub-title
+
+
+    forall Paragraphs-Blocks [
+
+        Paragraph-Content: Paragraphs-Blocks/1
+        forall Paragraph-Content [
+
+            refresh-screen
+
+            label: Paragraph-Content/1
+            value: Paragraph-Content/2
+            if (form label) = ".title" [
+                title: value
+                .paragraph-title title ; emit markdown for paragraph title
+            ]
+            if (((form label) = ".text" ) or ((form label) = ".content" )) [
+                content: value
+                .content content ; emit markdown content with code block when any
+
+            ]    
+            if find (form label)  ".code" [
+
+                code-markup: {```}
+                if find (form label) "/" [
+                    language: (pick (split (form label) "/") 2)
+                    replace language ":" ""
+                    code-markup: rejoin [code-markup language]
+                ]               
+
+                content: rejoin [
+                    code-markup
+                    newline 
+                    value
+                    newline
+                    {```}
+                ] 
+                .content content ; emit markdown content with code block when any   
+            ]
+            if find (form label)  ".quote" [
+                content: rejoin [
+                    ">"
+                    trim/head value
+                    newline
+                ] 
+                .content content ; emit markdown content with quote                   
+            ]
+
+            if (form label) = ".image" [
+                image: value
+                .image image ; emit markdown for embedding image    
+            ]
+            if (((form label) = ".link" ) or ((form label) = ".url" )) [
+                url: value
+
+                either find (form label) "/" [
+                    ;refinement: (pick (split (form label) "/") 2)
+                    refinements: remove (split (form label) "/")
+                    forall refinements [replace/all refinements/1 ":" ""]
+                    
+                ][
+                    .link url ; emit markdown for link 
+                ]
+            
+            ]  
+
+            if (((form label) = ".links" ) or ((form label) = ".urls" )) [
+                links-collection: value
+                .links links-collection ; emit markdown for embedding image    
+            ]     
+            if (form label) = ".youtube" [
+                you-tube-url-or-id: value
+                .youtube you-tube-url-or-id
+            ]  
+
+            Paragraph-Content: next Paragraph-Content
+        ]        
+
+    ]
+
+    print (it: .to-full-path =>output-file) ; print file output path for info
+ 
+return it ; 0.0.0.5.01
+
+
+] 
+html-gen: :.html-gen
