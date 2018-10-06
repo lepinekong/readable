@@ -935,15 +935,15 @@ markdown-gen: :.markdown-gen
                             ; .replace/all line  "    " ""
                             flag: not flag; flag: false -> true
                             either flag [
-                                line: rejoin [newline newline "<pre>" line] ; 0.0.0.5.07
+                                line: rejoin [newline "<pre>" line] ; 0.0.0.5.07
                             ][
-                                ; append line newline
+                                append line newline
                                 ; append line newline
                             ]
                         ]
                         either flag = true [
                             ; .replace/all line  "                " ""
-                            ; append line newline
+                            append line newline
                         ][
                             ; .replace/all line  "    " ""
                             line: rejoin [line "</pre>"] ; 0.0.0.5.07
@@ -968,7 +968,7 @@ markdown-gen: :.markdown-gen
                 ]
                 
             ][
-                content: .replace/all content  "    " ""
+                ; content: .replace/all content  "    " ""
             ]
             content: rejoin ["<p>" content "</p>"]
             emit content
