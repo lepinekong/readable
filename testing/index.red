@@ -1,9 +1,9 @@
 Red [
     Title: "ReAdABLE.Human.Format"
     Description: {ReAdABLE Human Format Library}
-    GUID: #7475b7be-08ac-4a61-ad1d-eda9fcf5f50d
+    GUID: #1c2541ec-5668-4a6f-a479-4ff560933a14
     Builds: [
-        0.0.0.5.8.1 {Html-Gen prototype - added paragraph .sub-title}
+        0.0.0.5.8.1 {Html-Gen prototype - added paragraph .sub-title} 
     ]
     TODO: [
         00.01 {Common code between markdown and html}
@@ -894,6 +894,15 @@ markdown-gen: :.markdown-gen
         .paragraph-title: :emit-paragraph-title
 
 
+        emit-paragraph-sub-title: function[.title][
+
+            unless ((none? .title) or (.title = "")) [
+                emit-title-level .title 4     
+            ]      
+        ]
+        .paragraph-sub-title: :emit-paragraph-sub-title
+
+
         emit-image: function[image][
 
             if find image "https://imgur.com" [
@@ -923,21 +932,21 @@ markdown-gen: :.markdown-gen
                         i: index? lines
                         if find line {```} [
                             .replace/all line {```} "" ; 0.0.0.5.07
-                            .replace/all line  "    " ""
+                            ; .replace/all line  "    " ""
                             flag: not flag; flag: false -> true
                             either flag [
-                                line: rejoin [newline newline "<code>" line] ; 0.0.0.5.07
+                                line: rejoin [newline newline "<pre>" line] ; 0.0.0.5.07
                             ][
-                                append line newline
-                                append line newline
+                                ; append line newline
+                                ; append line newline
                             ]
                         ]
                         either flag = true [
-                            .replace/all line  "                " ""
-                            append line newline
+                            ; .replace/all line  "                " ""
+                            ; append line newline
                         ][
-                            .replace/all line  "    " ""
-                            line: rejoin [line "</code>"] ; 0.0.0.5.07
+                            ; .replace/all line  "    " ""
+                            line: rejoin [line "</pre>"] ; 0.0.0.5.07
                         ]
                         append content-block line                   
                     ]
@@ -1121,15 +1130,6 @@ markdown-gen: :.markdown-gen
         .links: :emit-links
 
 
-        emit-paragraph-sub-title: function[.title][
-
-            unless ((none? .title) or (.title = "")) [
-                emit-title-level .title 4     
-            ]      
-        ]
-        .paragraph-sub-title: :emit-paragraph-sub-title
-
-
     ]
 
 ;-------------------------------------------------------------------------
@@ -1201,6 +1201,10 @@ markdown-gen: :.markdown-gen
                 title: value
                 .paragraph-title title ; emit markdown for paragraph title
             ]
+            if (form label) = ".sub-title" [
+                title: value
+                .paragraph-sub-title title ; emit markdown for paragraph title
+            ]
             if (((form label) = ".text" ) or ((form label) = ".content" )) [
                 content: value
                 .content content ; emit markdown content with code block when any
@@ -1259,10 +1263,6 @@ markdown-gen: :.markdown-gen
                 you-tube-url-or-id: value
                 .youtube you-tube-url-or-id
             ]  
-            if (form label) = ".sub-title" [
-                title: value
-                .paragraph-sub-title title ; emit markdown for paragraph title
-            ]
 
             Paragraph-Content: next Paragraph-Content
         ]        
