@@ -921,55 +921,13 @@ markdown-gen: :.markdown-gen
 
 
         emit-content: function [content][
-            content-block: copy []  
-            either find content {```} [
-                use [lines flag flag_line][
-                    
-                    lines: .read/lines content
-                    flag: false
-                    forall lines [
-                        line: lines/1
-                        i: index? lines
-                        if find line {```} [
-                            .replace/all line {```} "" ; 0.0.0.5.07
-                            ; .replace/all line  "    " ""
-                            flag: not flag; flag: false -> true
-                            either flag [
-                                line: rejoin [newline "<pre>" line] ; 0.0.0.5.07
-                            ][
-                                append line newline
-                                ; append line newline
-                            ]
-                        ]
-                        either flag = true [
-                            ; .replace/all line  "                " ""
-                            append line newline
-                        ][
-                            ; .replace/all line  "    " ""
-                            line: rejoin [line "</pre>"] ; 0.0.0.5.07
-                        ]
-                        append content-block line                   
-                    ]
+            rule: [
+                any [
+                    to {```} start: thru {```} finish: change/part start "<pre>" finish
+                    to {```} start: thru {```} finish: change/part start "</pre>" finish
                 ]
-
-                content: copy ""
-                forall content-block [
-                    i: index? content-block
-                    n: length? content-block
-                    
-                    append content content-block/1
-                    unless i = n [
-                        unless find content newline [
-                            append content newline
-                        ]
-                        
-                    ]
-                    
-                ]
-                
-            ][
-                ; content: .replace/all content  "    " ""
             ]
+            parse content rule
             content: rejoin ["<p>" content "</p>"]
             emit content
         ]
