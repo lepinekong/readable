@@ -1,9 +1,14 @@
 Red [
     Title: "ReAdABLE.Human.Format"
     Description: {ReAdABLE Human Format Library}
-    GUID: #7475b7be-08ac-4a61-ad1d-eda9fcf5f50d
+    GUID: #1c2541ec-5668-4a6f-a479-4ff560933a14
     Builds: [
-        0.0.0.5.6.1 {Html-Gen}
+        0.0.0.5.8.1 {Html-Gen prototype - added paragraph .sub-title} 
+    ]
+    TODO: [
+        00.01 {Common code between markdown and html}
+        01.01 {Refactor and Fix .code formatting}
+        01.02 {Automatically convert block of links to .links}
     ]
 ]
 
@@ -889,6 +894,15 @@ markdown-gen: :.markdown-gen
         .paragraph-title: :emit-paragraph-title
 
 
+        emit-paragraph-sub-title: function[.title][
+
+            unless ((none? .title) or (.title = "")) [
+                emit-title-level .title 4     
+            ]      
+        ]
+        .paragraph-sub-title: :emit-paragraph-sub-title
+
+
         emit-image: function[image][
 
             if find image "https://imgur.com" [
@@ -907,55 +921,13 @@ markdown-gen: :.markdown-gen
 
 
         emit-content: function [content][
-            content-block: copy []  
-            either find content {```} [
-                use [lines flag flag_line][
-                    
-                    lines: .read/lines content
-                    flag: false
-                    forall lines [
-                        line: lines/1
-                        i: index? lines
-                        if find line {```} [
-                            .replace/all line {```} "" ; 0.0.0.5.07
-                            .replace/all line  "    " ""
-                            flag: not flag; flag: false -> true
-                            either flag [
-                                line: rejoin [newline newline "<code>" line] ; 0.0.0.5.07
-                            ][
-                                append line newline
-                                append line newline
-                            ]
-                        ]
-                        either flag = true [
-                            .replace/all line  "                " ""
-                            append line newline
-                        ][
-                            .replace/all line  "    " ""
-                            line: rejoin [line "</code>"] ; 0.0.0.5.07
-                        ]
-                        append content-block line                   
-                    ]
+            rule: [
+                any [
+                    to {```} start: thru {```} finish: change/part start "<pre>" finish
+                    to {```} start: thru {```} finish: change/part start "</pre>" finish
                 ]
-
-                content: copy ""
-                forall content-block [
-                    i: index? content-block
-                    n: length? content-block
-                    
-                    append content content-block/1
-                    unless i = n [
-                        unless find content newline [
-                            append content newline
-                        ]
-                        
-                    ]
-                    
-                ]
-                
-            ][
-                content: .replace/all content  "    " ""
             ]
+            parse content rule
             content: rejoin ["<p>" content "</p>"]
             emit content
         ]
@@ -1186,6 +1158,10 @@ markdown-gen: :.markdown-gen
             if (form label) = ".title" [
                 title: value
                 .paragraph-title title ; emit markdown for paragraph title
+            ]
+            if (form label) = ".sub-title" [
+                title: value
+                .paragraph-sub-title title ; emit markdown for paragraph title
             ]
             if (((form label) = ".text" ) or ((form label) = ".content" )) [
                 content: value
