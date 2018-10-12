@@ -913,7 +913,7 @@ markdown-gen: :.markdown-gen
             ]
             unless none? image [
                 emit [
-                    {<a href='} image {'>}{<img src='} image {' width='100%' height='100%'>}{</a>}
+                    {<a href='} image {'>}{<img src='} image {'>}{</a>}
                 ]
             ]            
         ]
