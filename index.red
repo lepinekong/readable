@@ -1188,8 +1188,9 @@ markdown-gen: :.markdown-gen
             ]
             if find (form label)  ".quote" [
                 content: rejoin [
-                    ">"
+                    "<pre class='code-command'>"
                     trim/head value
+                    "</pre>"
                     newline
                 ] 
                 .content content ; emit markdown content with quote                   
