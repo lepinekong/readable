@@ -1188,7 +1188,7 @@ markdown-gen: :.markdown-gen
             ]
             if find (form label)  ".quote" [
                 content: rejoin [
-                    "<pre class='quote'>"
+                    "<pre class='code-command'>"
                     trim/head value
                     "</pre>"
                     newline
