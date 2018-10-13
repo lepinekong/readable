@@ -923,10 +923,10 @@ markdown-gen: :.markdown-gen
         emit-content: function [content][
             rule: [
                 any [
-                    to {>} start: thru {>} finish: (change/part start "<pre class="code-command">" finish)
+                    to {>} start: thru {>} finish: (change/part start "<pre class='code-command'>" finish)
                     to newline start: (insert start "</pre>")
                     |
-                    to {```} start: thru {```} finish: (change/part start "<pre class="code-listing">" finish)
+                    to {```} start: thru {```} finish: (change/part start "<pre class='code-listing'>" finish)
                     to {```} start: thru {```} finish: (change/part start "</pre>" finish)
                 ]
             ]
