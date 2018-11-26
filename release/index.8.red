@@ -1,26 +1,14 @@
 Red [
     Title: "ReAdABLE.Human.Format"
     Description: {ReAdABLE Human Format Library}
-    UUID: #e51f5fac-ef28-49a1-a34e-ce27f8278dcb
+    GUID: #1c2541ec-5668-4a6f-a479-4ff560933a14
     Builds: [
-        0.0.0.6.01.7 {added TODO}
         0.0.0.5.8.1 {Html-Gen prototype - added paragraph .sub-title} 
     ]
     TODO: [
-        00.00 {!fix bug for 
-            links: [
-                {registrar} namecheap.com
-            ]
-        }
-        00.00 {fix bug for readable.red\design\.index.html\0.0.0.8\01\specs.read.red:
-            - complement for logo doesn't show for markdown
-        }
-        00.00 {add image size option for html-gen}
         00.01 {Common code between markdown and html}
-        01.01 {Refactor and Fix .code formatting in case of markdown. Add tabs refinement}
+        01.01 {Refactor and Fix .code formatting}
         01.02 {Automatically convert block of links to .links}
-        01.03 {Support [] for .code}
-        01.04 {Support visible or invisible executable .code}
     ]
 ]
 
