@@ -1,10 +1,8 @@
 Red [
     Title: "authoring.red"
-    UUID: #65f80583-19a7-4450-b544-a07324f2b21f
     Origin: https://gist.github.com/lepinekong/7574892bfefe7e53e7bd4dd4759f30f8
     Builds: [
-		[0.0.0.1.2.1 {unless value? '.redlang [}]
-        [0.0.0.1.1 {Initial copy}]
+        0.0.0.1 {Initial copy}
     ]
     History: [
         v1.0: {initial version}
@@ -16,13 +14,9 @@ Red [
     ]
 ]
 
-
 set to-word rejoin ["--" ">"] none
 
 ->: .->: .=>: =>: ""
-unless value? '.redlang [
-	do https://redlang.red
-]
 
 .use: func [locals [block!] body [block!]][
 	do bind body make object! collect [
@@ -33,9 +27,9 @@ unless value? '.redlang [
 
 use: :.use
 
-
 .Config: func [spec [block!]][make object! spec]
 Config: :.Config
+
 .to-file: function [.file [file! string! word! block!]][
 
     either block? .file [
@@ -91,6 +85,7 @@ to-file: :.to-file
 ]
 
 to-dir: :.to-dir
+
 .switch: function [
     {Evaluates the first block following the value found in cases} 
     value [any-type!] "The value to match" 
@@ -100,6 +95,7 @@ to-dir: :.to-dir
     value: to-word value
     switch/default value cases case
 ] 
+
 .type?: function [
     "Returns the datatype of a value" 
     value [any-type!] 
@@ -108,7 +104,9 @@ to-dir: :.to-dir
 ]
 
 .cases: :.switch
+
 .if: :either
+
 .get-full-path: function[.path  [file! string! url!]][
 
     .cases .type? '.path [
@@ -123,6 +121,7 @@ to-dir: :.to-dir
     clean-path path
 ]
 .to-full-path: :.get-full-path
+
 .request-file: function [/dir .default-dir][
 
     either dir [
@@ -145,6 +144,7 @@ to-dir: :.to-dir
 ]
 
 get-short-filename: :.get-short-filename
+
 .split-filename: function[.filename][
 
     {
@@ -160,12 +160,14 @@ get-short-filename: :.get-short-filename
 ]
 
 split-filename: :.split-filename
+
 .get-file-extension: function[.filepath [file! url!]][
     short-filename: .get-short-filename .filepath 
     return pick (.split-filename short-filename) 2
 ]
 
 get-file-extension: :.get-file-extension
+
 .replace: function [
     series [series! none!] 
     pattern 
@@ -185,6 +187,7 @@ get-file-extension: :.get-file-extension
         return none
     ]
 ]
+
 .Read: function [
     "Reads from a file, URL, or other port" 
     source [file! url! string! unset!] 
@@ -299,6 +302,7 @@ if not value? 'sysRead [
 ]
 
 Html.Read: :.Html.Read
+
 .html.get-title: function[source][
 
     html-to-parse: .html.read to-url source
@@ -317,11 +321,13 @@ Html.Read: :.Html.Read
 
 html.get.title: :.html.get-title
 html.get6title: :.html.get-title
+
 .select: function [.block-spec [block!] .selector [word! string!]][
     selector: to-set-word form .selector
     block: .block-spec
     select block selector
 ]
+
 .emit: function [.line [char! string! block! none!]][
 
     if none? .line [exit]
@@ -357,6 +363,7 @@ html.get6title: :.html.get-title
 ]
 
 get-github-url: :.get-github-url
+
 if not value? 'syswrite-clipboard [
     syswrite-clipboard: :write-clipboard
     write-clipboard: function [data [string! file! url!] /local filePath][
@@ -397,6 +404,7 @@ if not value? 'syswrite-clipboard [
 ] 
 
 to-reAdABLE: :.to-reAdABLE
+
 .to-json: function[.source [block! file! url!]][
 
     if not value? 'to-json [
@@ -420,6 +428,7 @@ to-reAdABLE: :.to-reAdABLE
 
     return to-json source    
 ]
+
 .build-markup: func [
     {Return markup text replacing <%tags%> with their evaluated results.}
     content [string! file! url!]
@@ -450,6 +459,7 @@ to-reAdABLE: :.to-reAdABLE
 ]
 
 build-markup: :.build-markup
+
 .string.expand: function[.string-template [string!] .block-vars[block!]][
 
     return build-markup/bind .string-template Context Compose .block-vars
@@ -457,6 +467,8 @@ build-markup: :.build-markup
 
 string-expand: :.string.expand
 .expand: :.string.expand
+
+
 .Redlang.Get-Meta: function[.src [string! file! url!]][
 
     {Purpose: 
@@ -579,6 +591,8 @@ Redlang.Get-Body: :.Redlang.Get-Body
 do-trace: :.do-trace
 
 .guiconsole?: not (system/console = none)
+
+
 .do-events: function [
     
 	{Launch the event loop, blocks until all windows are closed} 
@@ -595,6 +609,7 @@ do-trace: :.do-trace
         ]
     ]
 ] 
+
 .copy-file: function[ .what-files [file! block!]
     /target-folder .target-folder 
     /github ; same as none target-folder; .target-folder will be first .github folder encountered in parent folders
@@ -645,4 +660,3 @@ do-trace: :.do-trace
         copy-file .what-files
     ]
 ]
-
