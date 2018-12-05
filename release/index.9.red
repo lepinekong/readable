@@ -1,7 +1,7 @@
 Red [
     Title: "ReAdABLE.Human.Format"
     Description: {ReAdABLE Human Format Library}
-    UUID: #7e8bafac-9155-4386-be35-38ad8e41d5c6
+    UUID: #e51f5fac-ef28-49a1-a34e-ce27f8278dcb
     Builds: [
         0.0.0.6.01.7 {added TODO}
         0.0.0.5.8.1 {Html-Gen prototype - added paragraph .sub-title} 
@@ -804,11 +804,7 @@ markdown-gen: :.markdown-gen
 ;===========================================================================================
 
 
-.html-gen: function [ 
-    /input <=input-file 
-    /output =>output-file [file! url! string! unset!]
-    /out =>out-file [file! url! string! unset!] ; same as output
-][
+.html-gen: function [ /input <=input-file /output =>output-file [file! url! string! unset!]][
     condition: (not value? 'article) and (not value? 'tutorial)  
 
     either (condition) [
@@ -819,13 +815,6 @@ markdown-gen: :.markdown-gen
         unless input [
             <=input-file: .default-input-file
         ]
-
-        ;--- start index.0.0.0.6.3.2.red
-        if out [
-            output: true
-            =>output-file: =>out-file
-        ]   
-        ;--- finish index.0.0.0.6.3.2.red     
 
         unless output [
             =>output-file: .default-output-file
