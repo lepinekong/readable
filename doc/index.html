@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<title>Readable Human Format - getting started</title>
+
+<link href="./css/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="" type="image/x-icon"></head>
+<body>
+
+<!-- Begin the outermost container division -->
+<div id="container">
+
+<!-- begin main content division -->
+<div id="content">
+
+<H1>Readable Human Format</H1>
+
+
+<H2>Getting started</H2>
+
+<p>This is a quick guide to get started with generating documentation with <a href="https://readable.red">https://readable.&#82;ed</a>
+The library is still in very infancy stage (for example sub-title is not yet supported for markdown whereas it is for html) so it will become much richer in the future.
+<br>
+Currently it is capable of generating markdown and html page like this very page or for example:
+</p>
+<a href='https://redlang.red/source'>https://redlang.red/source</a>
+
+<H3>Pre-requisite</H3>
+
+
+<H4>Install &#82;edlang and VSCode Extension</H4>
+
+<p>Follow instruction on this page:</p>
+<a href='https://readable.red/#next'>https://readable.red/#next</a>
+<a href='redlang.png'><img src='redlang.png' width='100%' height='100%'></a>
+
+<H3>Generating Markdown</H3>
+
+
+<H4>Step 1:</H4>
+
+<p>Write a source in Readable Human Format, for example for this page:</p>
+<p><pre class='code-listing'>
+
+Title: {Readable.red}
+Sub-Title: {Getting started}
+
+Intro: [
+.text: {This is a quick guide to get started with generating documentation with <a href="https://readable.red">https://readable.&#82;ed</a>
+The library is still in very infancy stage so it will become much richer in the future.
+<br>
+Currently it is capable of generating markdown and html page like this very page or for example:
+}
+
+.links: [
+    <a href="https://redlang.red/source">https://&#82;edlang.&#82;ed/source</a>
+]
+]
+
+Pre-requisite: [
+    .title: {Installation}
+    .sub-title: {Follow instruction on this page:}
+    .link: https://readable.red/#next
+    .image: %redlang.png
+]
+
+Markdown: [
+    
+    .title: {Generating Markdown}
+    .sub-title: {Step 1:}
+    .text: {Write a source in Readable Human Format, for example for this page:}    
+]
+
+.code: {
+Title: {Readable.red}
+Sub-Title: {Getting started}    
+
+Intro: [
+.text: {This is a quick guide to get started with generating documentation with <a href="https://readable.red">https://readable.&#82;ed</a>
+The library is still in very infancy stage so it will become much richer in the future.
+<br>
+Currently it is capable of generating markdown and html page like this very page or for example:
+}
+
+.links: [
+    <a href="https://redlang.red/source">https://&#82;edlang.&#82;ed/source</a>
+]
+]
+
+Markdown: [
+    
+    .title: {Generating Markdown}
+    .sub-title: {Step 1:}
+    .text: {Write a source in Readable Human Format, for example for this page:}    
+]
+.code: {
+    etc...
+}
+}
+
+    
+</pre></p>
+
+<H4>Step 2:</H4>
+
+<p>Save the readable document as for example:</p>
+<p><pre class='quote'>content.read.red</pre>
+</p>
+<p>Create a file named for example:</p>
+<p><pre class='quote'>gen-markdown.red</pre>
+</p>
+<p>inside that file, type this code:</p>
+<p><pre class='code-listing'>
+
+do https://readable.red
+article: load %content.read.red
+markdown-gen/output %article.md        
+    
+</pre></p>
+<p>In Vscode, right-click to get menu and choose option:</p>
+<p><pre class='quote'>Run &#82;ed Script</pre>
+</p>
+<p>you should get your markdown to previsualize:</p>
+<a href='markdown.png'><img src='markdown.png' width='100%' height='100%'></a>
+
+<H3>Generating Html</H3>
+
+<p>Coming soon</p>
+    
+</div>  
+<!-- End the content division -->
+
+
+<!-- print footer -->
+</div>
+
+
+</div>  <!-- End the container division -->
+
+
+</body></html>
+
+<!--
+Red []    
+set to-word rejoin ["--" ">"] "readable loaded"    
+do https://readable.red/index.red
+-->
+
