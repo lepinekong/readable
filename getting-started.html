@@ -152,32 +152,20 @@ do %learn-khmer.red
 }
     
 </pre></p>
+<p><button id="open-popup">Subscribe to our mailing list</button></p>
 <p>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
-	<script>
-	var mailchimpConfig = {
-			baseUrl: 'mc.us20.list-manage.com',
-			uuid: '363b40a4db743ba4ef5a555a3',
-			lid: 'f99b32278c'
-		};
+<script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
 
-	// No edits below this line are required
-	var chimpPopupLoader = document.createElement("script");
-	chimpPopupLoader.src = '//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/';
-	chimpPopupLoader.setAttribute('data-dojo-config', 'usePlainJson: true, isDebug: false');
+<script>
+function showMailingPopUp() {
+    require(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us20.list-manage.com","uuid":"363b40a4db743ba4ef5a555a3","lid":"f99b32278c"}) })
+    document.cookie = "MCEvilPopupClosed=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+};
 
-	jQuery(function ($) {
-		document.body.appendChild(chimpPopupLoader);
-
-		jQuery(".coming-soon").on("click", function () {
-			require(["mojo/signup-forms/Loader"], function (L) { L.start({"baseUrl": mailchimpConfig.baseUrl, "uuid": mailchimpConfig.uuid, "lid": mailchimpConfig.lid})});
-			document.cookie = 'MCPopupClosed=;path=/;expires=Thu, 01 Jan 1970 00:00:00 UTC;';
-		});
-
-	});
-	</script>
-
+document.getElementById("open-popup").onclick = function() {showMailingPopUp()};
+</script>
     </p>
     
 </div>  
