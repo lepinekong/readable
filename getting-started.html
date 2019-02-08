@@ -153,8 +153,30 @@ do %learn-khmer.red
     
 </pre></p>
 <p>
-<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
-<script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us20.list-manage.com","uuid":"363b40a4db743ba4ef5a555a3","lid":"f99b32278c","uniqueMethods":true}) })</script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+	<script>
+	var mailchimpConfig = {
+			baseUrl: 'mc.us20.list-manage.com',
+			uuid: '363b40a4db743ba4ef5a555a3',
+			lid: 'f99b32278c'
+		};
+
+	// No edits below this line are required
+	var chimpPopupLoader = document.createElement("script");
+	chimpPopupLoader.src = '//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/';
+	chimpPopupLoader.setAttribute('data-dojo-config', 'usePlainJson: true, isDebug: false');
+
+	jQuery(function ($) {
+		document.body.appendChild(chimpPopupLoader);
+
+		jQuery(".coming-soon").on("click", function () {
+			require(["mojo/signup-forms/Loader"], function (L) { L.start({"baseUrl": mailchimpConfig.baseUrl, "uuid": mailchimpConfig.uuid, "lid": mailchimpConfig.lid})});
+			document.cookie = 'MCPopupClosed=;path=/;expires=Thu, 01 Jan 1970 00:00:00 UTC;';
+		});
+
+	});
+	</script>
 
     </p>
     
