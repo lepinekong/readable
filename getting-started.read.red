@@ -2,8 +2,8 @@ Title: {Getting started with ReAdable Human Format}
 Sub-Title: {step by step guide}
 
 Intro: [
-.text: {Readable human format is meant to be very easy to read, to write and to generate
-<br>Note: this step by step guide has been generated with readable human format. Source is available <a href='getting-started.red'>here</a>.
+.text: {<a href='/'><b>Readable human format</b></a> is meant to be very easy to read, to write and to generate.
+<br>We eat our own dog food: this step by step guide has been generated with <a href='/'><b>Readable human format</b></a>. Source is available <a href='getting-started.read.red'>here</a>.
 }]
 
 Usage: [
@@ -53,8 +53,9 @@ Footer: [
      .sub-title: {Copyrigth Lépine Kong}
 ]
     }
-    text: {Rules are very few:}
+    .text: {Rules are very few and simple:}
     .quote: {1. a block of paragraphs is delimited with brackets [] and has a label like "Content:" 
+<br>
 2. Document title and sub-title are not enclosed by brackets
 <br>
 3. tags like .title, .text, .quote, .image are prefixed with dot . otherwise it acts as meta-tags. 
@@ -121,9 +122,24 @@ Faq: [
     }
 ]
 
-Script: [
+Subscribe: [
+    .title: {Subscribe to our mailing list}
+    .sub-title: {To receive update news once a month}
+    .text: {Just click below:
+    <br><br><button id='open-popup' style='background:red;color: white;cursor:pointer;font-size: 14px;text-align: center;text-decoration: none;border: none;border-radius: 3px;padding: 13px 32px;font-family:Helvetica Neue,Arial,Helvetica,Verdana,sans-serif' >Subscribe to our mailing list</button>
+    }
     .text: {
-<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us20.list-manage.com","uuid":"363b40a4db743ba4ef5a555a3","lid":"f99b32278c","uniqueMethods":true}) })</script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
+<script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+
+<script>
+function showMailingPopUp() {
+    require(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us20.list-manage.com","uuid":"363b40a4db743ba4ef5a555a3","lid":"f99b32278c"}) })
+    document.cookie = "MCPopupClosed=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+};
+
+document.getElementById("open-popup").onclick = function() {showMailingPopUp()};
+</script>
     }
 ]
