@@ -94,10 +94,22 @@ for example &#94;}. If you need to show red escape character &#94;, you must htm
     </pre>
 </p>
 
-<H4>Step 2. Create a build script</H4>
+<H4>Step 2. add inline code to generate output or create a build script</H4>
 
 <p>There are 2 main ways to do so. </p>
-<p><br>Usual way is to create a separate script file learn-khmer.red for our example with this code:</p>
+<p>Quick way is to create a readable document wrapped with:</p>
+<p><pre class='code-listing'>
+
+&#82;ed []
+article: [
+    ...
+]
+do https://readable.red
+.markdown-gen ; to generate markdown 
+.html-gen ; to generate html
+    
+</pre></p>
+<p><br>Or create a separate script file <b>learn-khmer.red</b> for our example:</p>
 <p><pre class='code-listing'>
 
 article: load %learn-khmer.read.2.red ; article is mandatory name
@@ -106,7 +118,7 @@ do https://readable.red
 .html-gen ; to generate html
     
 </pre></p>
-<p>. prefix is not mandatory it's our convention to differentiate a function or command from a variable name.</p>
+<p>.markdown-gen or .html-gen or markdown-gen or html-gen will work. It's our convention to prefix with . to visually differentiate a function or command from a variable name.</p>
 
 <H4>Step 3. If not done yet, install &#82;ed and optionally VSCode with &#82;ed extension</H4>
 
