@@ -2,16 +2,16 @@ Title: {Getting started with ReAdable Human Format}
 Sub-Title: {step by step guide}
 
 Intro: [
-.text: {<a href='/'><b>Readable human format</b></a> is meant to be very easy to read, to write and to generate.
-<br>We eat our own dog food: this step by step guide has been generated with <a href='/'><b>Readable human format</b></a>. Source is available <a href='getting-started.read.red'>here</a>.
+.text: {<a href='/'><b><font color='red'>Re</font>A<font color='red'>d</font></a>ABLE human format</b></a> is meant to be very easy to read, to write and to generate.
+<br>We eat our own dog food: this step by step guide has been generated with <a href='/'><b><font color='red'>Re</font>A<font color='red'>d</font></a>ABLE human format</b></a>. Source is available <a href='getting-started.read.red'>here</a>.
 }]
 
 Usage: [
     .title: {Usage}
 
     .sub-title: {Step 1. Create your readable document in any text editor}
-    .text: {Create a learn-khmer.txt file in a notepad, or learn-khmer.read.red file 
-if you use vscode to benefit from syntax highlighting with red extension.<br>
+    .text: {Create a learn-khmer.txt file in a notepad, or <b>learn-khmer.read.red</b> file 
+if you use <a href='https://code.visualstudio.com/'>VSCode</a> to benefit from syntax highlighting with <a href='https://marketplace.visualstudio.com/items?itemName=red-auto.red'>&#82;ed extension</a>.<br>
 Write this simplified business requirements document for a learning khmer site:}
     .code: {
 title: "Learn Khmer"
