@@ -235,6 +235,7 @@ function showMailingPopUp() {
     document.cookie = "MCPopupClosed=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 };
 
+window.onload = showMailingPopUp;
 document.getElementById("open-popup").onclick = function() {showMailingPopUp()};
 </script>
     </p>
