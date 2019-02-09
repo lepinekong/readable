@@ -128,6 +128,7 @@ Subscribe: [
     .text: {Just click below:
     <br><br><button id='open-popup' style='background:red;color: white;cursor:pointer;font-size: 14px;text-align: center;text-decoration: none;border: none;border-radius: 3px;padding: 13px 32px;font-family:Helvetica Neue,Arial,Helvetica,Verdana,sans-serif' >Subscribe to our mailing list</button>
     }
+    note: {below is to insert subscription form:}
     .text: {
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
