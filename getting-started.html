@@ -92,7 +92,7 @@ Same result if it is an unknown tag (in the future you'll be able to define cust
 <br>
 4. text is either enclosed by double quotes "" or curly braces {}. Curly braces allow multi-lines contrary to double quotes. 
 <br>
-That's all you need to know as business user except one more thing: if ever your text contains any word containing "&#82;ed" (red is ok) you must replace this string by "&#x26;#82;ed" (in a future evolution, we'll do it for you.)
+That's all you need to know as business user. 
 <br>
 If you are a webdesigner or a developer, you may have to deal with html entities encoding:
 <br> 
@@ -100,6 +100,7 @@ If you are a webdesigner or a developer, you may have to deal with html entities
 for example &#94;}. If you need to show red escape character &#94;, you must html encode it with &#x26;#94; (see <a href='https://www.freeformatter.com/html-entities.html'>https://www.freeformatter.com/html-entities.html</a>)
 <br>
 4.2 you can use html tags like &#x3C;br&#x3E; or &#x3C;a href=&#x27;...&#x27;&#x3E;&#x3C;/a&#x3E; inside text. If you want to show html tags litterally, you must encode them (use an online encoder like <a href='https://mothereff.in/html-entities'>https://mothereff.in/html-entities</a>)
+4.3 one more thing: if you are a &#82;ed developer and you want to use <a href='https://redlang.red/html-proxy'>html proxy</a> pattern,  if ever your html content contains any word containing "&#82;ed" (red is ok) you must replace this string by "&#x26;#82;ed": that's the way the &#82;ed interpreter works with html content (in a future evolution, we'll automate the replacement for you.)
     </pre>
 </p>
 
@@ -212,7 +213,8 @@ document.getElementById(&#x22;open-popup&#x22;).onclick = function() {showMailin
 
 <H4>How to add Google Analytics <a href='/'><b><font color='red'>Re</font><font color='black'>A</font><font color='red'>d</font><font color='black'>ABLE human format</font></b></a> document</H4>
 
-<p>Currently adding script into html header is not accessible for content writer. It should be added later during the process of generating the complete html page: we'll see how to in the next future tutorial.</p>
+<p>Currently adding script into html header is not accessible for content writer. It should be added later during the process of generating the complete html page: we'll see how to in the next future tutorial.
+Don't forget to subscribe to our mailing list to get notified of our tutorial on <b>Google Analytics</b> inclusion. If there are enough demand, we may add create a text /header refinement to be able to add to insert script into header easily.</p>
 
 <H3>Subscribe to our mailing list</H3>
 
