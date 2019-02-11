@@ -97,9 +97,10 @@ That's all you need to know as business user.
 If you are a webdesigner or a developer, you may have to deal with html entities encoding:
 <br> 
 4.1 you can generally embed braces inside braces without the need to escape character except if it is ambiguous in that case use &#94; to prefix a curly brace,
-for example &#94;}. If you need to show red escape character &#94;, you must html encode it with &#x26;#94; (see <a href='https://www.freeformatter.com/html-entities.html'>https://www.freeformatter.com/html-entities.html</a>)
+for example &#94;}. If you need to show character &#94; which is red escape character, you must html encode it with &#x26;#94; (see <a href='https://www.freeformatter.com/html-entities.html'>https://www.freeformatter.com/html-entities.html</a>)
 <br>
 4.2 you can use html tags like &#x3C;br&#x3E; or &#x3C;a href=&#x27;...&#x27;&#x3E;&#x3C;/a&#x3E; inside text. If you want to show html tags litterally, you must encode them (use an online encoder like <a href='https://mothereff.in/html-entities'>https://mothereff.in/html-entities</a>)
+<br>
 4.3 one more thing: if you are a &#82;ed developer and you want to use <a href='https://redlang.red/html-proxy'>html proxy</a> pattern,  if ever your html content contains any word containing "&#82;ed" (red is ok) you must replace this string by "&#x26;#82;ed": that's the way the &#82;ed interpreter works with html content (in a future evolution, we'll automate the replacement for you.)
     </pre>
 </p>
