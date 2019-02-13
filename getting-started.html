@@ -96,12 +96,13 @@ That's all you need to know as business user.
 <br>
 If you are a webdesigner or a developer, you may have to deal with html entities encoding:
 <br> 
-4.1 you can generally embed braces inside braces without the need to escape character except if it is ambiguous in that case use &#94; to prefix a curly brace,
+4.1 for markdown output to github, you can use refinement for example code/javascript to create specific styling for code tag.
+4.2 for direct html output you can use html tags like &#x3C;br&#x3E; or &#x3C;a href=&#x27;...&#x27;&#x3E;&#x3C;/a&#x3E; inside text. If you want to show html tags litterally, you must either wrap with &#x3C;xmp&#x3E;&#x3C;/xmp&#x3E; tags or encode them (use an online encoder like <a href='https://mothereff.in/html-entities'>https://mothereff.in/html-entities</a>)
+<br>
+4.3 you can generally embed braces inside braces without the need to escape character except if it is ambiguous in that case use &#94; to prefix a curly brace,
 for example &#94;}. If you need to show character &#94; which is red escape character, you must html encode it with &#x26;#94; (see <a href='https://www.freeformatter.com/html-entities.html'>https://www.freeformatter.com/html-entities.html</a>)
 <br>
-4.2 you can use html tags like &#x3C;br&#x3E; or &#x3C;a href=&#x27;...&#x27;&#x3E;&#x3C;/a&#x3E; inside text. If you want to show html tags litterally, you must encode them (use an online encoder like <a href='https://mothereff.in/html-entities'>https://mothereff.in/html-entities</a>)
-<br>
-4.3 one more thing: if you are a &#82;ed developer and you want to use <a href='https://redlang.red/html-proxy'>html proxy</a> pattern,  if ever your html content contains any word containing "&#82;ed" (red is ok) you must replace this string by "&#x26;#82;ed": that's the way the &#82;ed interpreter works with html content (in a future evolution, we'll automate the replacement for you.)
+4.4 one more thing: if you are a &#82;ed developer and you want to use <a href='https://redlang.red/html-proxy'>html proxy</a> pattern,  if ever your html content contains any word containing "&#82;ed" (red is ok) you must replace this string by "&#x26;#82;ed": that's the way the &#82;ed interpreter works with html content (in a future evolution, we'll automate the replacement for you.)
     </pre>
 </p>
 
@@ -120,7 +121,7 @@ do https://readable.red
 .html-gen ; to generate html
     
 </pre></p>
-<p><br>Or create a separate script file <b>learn-khmer.red</b> for our example:</p>
+<p><br>Or create a script for build, <b>learn-khmer.red</b> in our example:</p>
 <p><pre class='code-listing'>
 
 article: load %learn-khmer.read.2.red ; article is mandatory name
@@ -131,9 +132,9 @@ do https://readable.red
 </pre></p>
 <p>.markdown-gen or .html-gen or markdown-gen or html-gen will work. It's our convention to prefix with . to visually differentiate a function or command from a variable name.</p>
 
-<H4>Step 3. If not done yet, install &#82;ed and optionally VSCode with &#82;ed extension</H4>
+<H4>Step 3. If not done yet, download &#82;ed</H4>
 
-<p>Install only older version, for windows: <a href='https://static.red-lang.org/dl/win/red-063.exe'>https://static.red-lang.org/dl/win/red-063.exe</a></p>
+<p>Install is straightforward: download and run the exe. <br>Install only older version only - at the moment readable library is not compatible with latest version; for windows use this link: <a href='https://static.red-lang.org/dl/win/red-063.exe'>https://static.red-lang.org/dl/win/red-063.exe</a></p>
 <p>Preferably install <a href='https://code.visualstudio.com/'>VSCode</a> with <a href='https://marketplace.visualstudio.com/items?itemName=red-auto.red'>&#82;ed extension</a></p>
 <p><br>on Windows, run this command for VSCode to be able to run &#82;ed in terminal:</p>
 <p><pre class='quote'>red.exe --cli</pre>
