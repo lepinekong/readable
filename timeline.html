@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<title>&#82;edlang documentation - timeline function extended</title>
+
+<link href="./css/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="" type="image/x-icon"></head>
+<body>
+
+<!-- Begin the outermost container division -->
+<div id="container">
+
+<!-- begin main content division -->
+<div id="content">
+
+<H1>How to integrate a nice timeline</H1>
+
+
+<H2>in Readable Human Format document</H2>
+
+<p>In this tutorial we'll show how to integrate a nice timeline in readable human format.</p>
+<p>
+<script>
+window.onload = function() {new Timesheet('timesheet-placeholder', 2018, 2030, [
+            ['2018', '12/2018', 'redlang/readable/codeops/quickrun/quickinstall foundations', 'lorem'],
+            ['2019', '03/2019', 'redlang/readable/codeops/quickrun/quickinstall documentation', 'lorem'],
+            ['03/2019', '04/2019', 'quickinstall ', 'ipsum'],
+            ['2020', 'Had very bad luck'],
+            ['10/2020', '2023', 'At least had fun', 'dolor'],
+            ['02/2021', '05/2025', 'Enjoyed those times as well', 'ipsum']
+        ])  };
+</script> 
+</p>
+<p>
+            <div id="timesheet-placeholder" class="timesheet color-scheme-default">
+            </div>        
+    </p>
+<p>
+                <script type="text/javascript" src="https://sbstjn.com/timesheet.js/script/lib.js"></script>
+                <script type="text/javascript" src="https://sbstjn.com/timesheet.js/script/timesheet.min.js"></script>
+
+                <link rel="stylesheet" type="text/css" href="https://sbstjn.com/timesheet.js/styles/timesheet.css">       
+
+    </p>
+
+<H3>Step-1: Create your data set</H3>
+
+
+<H4>create a .text block and customize your data like this (you can enclose within Datas block for clarity but it isn't mandatory):</H4>
+
+<p><pre class='code-listing'>
+
+<xmp>
+Datas: [
+
+.text: {
+<script>
+window.onload = function() {new Timesheet('timesheet-placeholder', 2018, 2030, [
+            ['2018', '12/2018', 'redlang/readable/codeops/quickrun/quickinstall foundations', 'lorem'],
+            ['2019', '03/2019', 'redlang/readable/codeops/quickrun/quickinstall documentation', 'lorem'],
+            ['03/2019', '04/2019', 'quickinstall ', 'ipsum'],
+            ['2020', 'Had very bad luck'],
+            ['10/2020', '2023', 'At least had fun', 'dolor'],
+            ['02/2021', '05/2025', 'Enjoyed those times as well', 'ipsum']
+        ])  };
+</script> 
+}
+]
+</xmp>
+    
+</pre></p>
+    
+</div>  
+<!-- End the content division -->
+
+
+<!-- print footer -->
+</div>
+
+
+</div>  <!-- End the container division -->
+
+
+</body></html>
+
+<!--
+Red []    
+set to-word rejoin ["--" ">"] "timeline loaded"    
+do https://redlang.red/timeline.red
+-->
+
