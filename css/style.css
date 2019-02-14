@@ -10,7 +10,6 @@ body {
 	color: #000000;   /* Text in black */
 	font-family: "Segoe UI", Segoe, Calibri, Tahoma, Arial, Helvetica, Verdana, sans-serif;
 	font-size: 14px;
-	
 }
 p {
 	margin-top: 0.7em;
@@ -20,20 +19,14 @@ pre {
 	margin: 5px 0 6px 0;        /* top right bottom left */
 	border: 1px dashed;
 	padding: 3px 10px 3px 10px; /* top right bottom left */
+	font-family: Consolas, "Lucida Console", "Courier New", Courier, monospace;
+	font-size: 13px;
 	color: #000000;             /* Text in black */
 	line-height: 130%;
 	text-align: left;
-	white-space: pre-wrap;       /* css-3 */
-	white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-	white-space: -pre-wrap;      /* Opera 4-6 */
-	white-space: -o-pre-wrap;    /* Opera 7 */
-	word-wrap: break-word;       /* Internet Explorer 5.5+ */
-	background: linear-gradient(to right,#ecf2da,#f3f7e8);
 }
-
-pre,tt,code {
-	font-family:"Courier New", Courier, monospace;
-	font-size:100%;
+code {
+	font-family: Consolas, "Lucida Console", "Courier New", Courier, monospace;
 }
 
 /*
