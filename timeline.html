@@ -16,11 +16,11 @@
 
 <H2>in Readable Human Format document</H2>
 
-<p>In this tutorial we'll show how to integrate a nice timeline in readable human format.</p>
+<p>In this tutorial we'll show how to integrate this nice <a href='https://sbstjn.com/timesheet.js/'>timeline library</a> in readable human format.</p>
 <p>
 <script>
 window.onload = function() {new Timesheet('timesheet-placeholder', 2018, 2030, [
-            ['2018', '12/2018', 'redlang/readable/codeops/quickrun/quickinstall foundations', 'lorem'],
+            ['2018', '12/2018', 'readable core', ''],
             ['2019', '03/2019', 'redlang/readable/codeops/quickrun/quickinstall documentation', 'lorem'],
             ['03/2019', '04/2019', 'quickinstall ', 'ipsum'],
             ['2020', 'Had very bad luck'],
@@ -30,8 +30,8 @@ window.onload = function() {new Timesheet('timesheet-placeholder', 2018, 2030, [
 </script> 
 </p>
 <p>
-            <div id="timesheet-placeholder" class="timesheet color-scheme-default">
-            </div>        
+        <div id="timesheet-placeholder" class="timesheet color-scheme-default">
+        </div>        
     </p>
 <p>
                 <script type="text/javascript" src="https://sbstjn.com/timesheet.js/script/lib.js"></script>
@@ -41,29 +41,90 @@ window.onload = function() {new Timesheet('timesheet-placeholder', 2018, 2030, [
 
     </p>
 
-<H3>Step-1: Create your data set</H3>
+<H3>Step-1: Create dataset</H3>
 
 
-<H4>create a .text block and customize your data like this (you can enclose within Datas block for clarity but it isn't mandatory):</H4>
+<H4>Create datas in json format</H4>
 
+<p>create a .text block and customize data below in json format. 
+You can enclose within [] for clarity but it isn't mandatory, for example:</p>
 <p><pre class='code-listing'>
 
 <xmp>
 Datas: [
-
-.text: {
-<script>
-window.onload = function() {new Timesheet('timesheet-placeholder', 2018, 2030, [
-            ['2018', '12/2018', 'redlang/readable/codeops/quickrun/quickinstall foundations', 'lorem'],
-            ['2019', '03/2019', 'redlang/readable/codeops/quickrun/quickinstall documentation', 'lorem'],
-            ['03/2019', '04/2019', 'quickinstall ', 'ipsum'],
-            ['2020', 'Had very bad luck'],
-            ['10/2020', '2023', 'At least had fun', 'dolor'],
-            ['02/2021', '05/2025', 'Enjoyed those times as well', 'ipsum']
-        ])  };
-</script> 
-}
+    .text: {
+    <script>
+    window.onload = function() {new Timesheet('timesheet-placeholder', 2018, 2030, [
+                ['2018', '12/2018', 'redlang/readable/codeops/quickrun/quickinstall foundations', 'lorem'],
+                ['2019', '03/2019', 'redlang/readable/codeops/quickrun/quickinstall documentation', 'lorem'],
+                ['03/2019', '04/2019', 'quickinstall ', 'ipsum'],
+                ['2020', 'Had very bad luck'],
+                ['10/2020', '2023', 'At least had fun', 'dolor'],
+                ['02/2021', '05/2025', 'Enjoyed those times as well', 'ipsum']
+            ])  };
+    </script> 
+    }
 ]
+</xmp>
+    
+</pre></p>
+
+<H3>Step-2: Create a graphic placeholder</H3>
+
+
+<H4>Create a div placeholder</H4>
+
+<p>paste this code snippet:</p>
+<p><pre class='code-listing'>
+
+<xmp>
+Placeholder: [
+    .text: {
+        <div id="timesheet-placeholder" class="timesheet color-scheme-default">
+        </div>        
+    }
+]
+</xmp>
+    
+</pre></p>
+
+<H3>Step-3: Insert the timeline scripts and css files</H3>
+
+
+<H4>Create a div placeholder</H4>
+
+<p>paste this code snippet:</p>
+<p><pre class='code-listing'>
+
+<xmp>
+Scripts: [
+    .text: {
+        <script type="text/javascript" src="https://sbstjn.com/timesheet.js/script/lib.js"></script>
+        <script type="text/javascript" src="https://sbstjn.com/timesheet.js/script/timesheet.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="https://sbstjn.com/timesheet.js/styles/timesheet.css">       
+
+    } 
+]
+</xmp>
+    
+</pre></p>
+
+<H3>Step-4: Insert the timeline scripts and css files</H3>
+
+
+<H4>optional: override your main css stylesheet</H4>
+
+<p>if there is conflict between your stylesheet and the timeline stylesheet, add this snippet at the end of your stylesheet:</p>
+<p><pre class='code-listing'>
+
+<xmp>
+/*
+*Timeline overlapping
+*/
+.data{
+	margin-top: 15px!important;
+}
 </xmp>
     
 </pre></p>
