@@ -28,8 +28,20 @@
 <H2>Step by step guide</H2>
 
 <p><a href='/'><b><font color='red'>Re</font><font color='black'>A</font><font color='red'>d</font><font color='black'>ABLE human format</font></b></a> is meant to be very easy to read, to write and to generate.
-<br>We eat our own dog food: this <b>step by step guide</b> has been generated with <a href='/'><b><font color='red'>Re</font><font color='black'>A</font><font color='red'>d</font><font color='black'>ABLE human format</font></b></a>. 
-Source is available <a href='getting-started.read.red'>here</a> and proves complex document can be written easily like with inclusion of custom subscription form.
+    <br>We eat our own dog food: this <b>step by step guide</b> has been generated with <a href='/'><b><font color='red'>Re</font><font color='black'>A</font><font color='red'>d</font><font color='black'>ABLE human format</font></b></a>. 
+    Source is available <a href='getting-started.read.red'>here</a> and proves complex document can be written easily like with inclusion of custom subscription form.
+    </p>
+
+<H4>Index</H4>
+
+<p><pre class='quote'>- Getting Started (this article)
+<br>
+- <a href='/faq'>Faq</a>
+<br>
+- <a href='/timeline'>Timeline (Use case)</a>
+<br>
+- Tempating (Coming soon)
+    </pre>
 </p>
 
 <H3>Usage</H3>
@@ -92,12 +104,15 @@ Same result if it is an unknown tag (in the future you'll be able to define cust
 <br>
 4. text is either enclosed by double quotes "" or curly braces {}. Curly braces allow multi-lines contrary to double quotes. 
 <br>
+4.1 for integrating a subscription form see <a href='/faq'>faq</a>
+<br>
 That's all you need to know as business user. 
 <br>
 If you are a webdesigner or a developer, you may have to deal with html entities encoding:
 <br> 
-4.1 for markdown output to github, you can use refinement for example code/javascript to create specific styling for code tag.
-4.2 for direct html output you can use html tags like &#x3C;br&#x3E; or &#x3C;a href=&#x27;...&#x27;&#x3E;&#x3C;/a&#x3E; inside text. If you want to show html tags litterally, you must either wrap with &#x3C;xmp&#x3E;&#x3C;/xmp&#x3E; tags or encode them (use an online encoder like <a href='https://mothereff.in/html-entities'>https://mothereff.in/html-entities</a>)
+4.2 for markdown output to github, you can use refinement for example code/javascript to create specific styling for code tag.
+<br>
+4.3 for direct html output you can use html tags like &#x3C;br&#x3E; or &#x3C;a href=&#x27;...&#x27;&#x3E;&#x3C;/a&#x3E; inside text. If you want to show html tags litterally, you must either wrap with &#x3C;xmp&#x3E;&#x3C;/xmp&#x3E; tags or encode them (use an online encoder like <a href='https://mothereff.in/html-entities'>https://mothereff.in/html-entities</a>)
 <br>
 4.3 you can generally embed braces inside braces without the need to escape character except if it is ambiguous in that case use &#94; to prefix a curly brace,
 for example &#94;}. If you need to show character &#94; which is red escape character, you must html encode it with &#x26;#94; (see <a href='https://www.freeformatter.com/html-entities.html'>https://www.freeformatter.com/html-entities.html</a>)
@@ -164,79 +179,6 @@ do %learn-khmer.red
 <a href='img/getting-started-02.png'><img src='img/getting-started-02.png' width='100%' height='100%'></a>
 <p>Remark that the html generated is only partial (no htm header). 
 This is on purpose so as to separate presentation from content. Next time, we'll see how to build the complete html page.</p>
-
-<H3>Faq</H3>
-
-
-<H4>How to add table</H4>
-
-<p>Well we'll create a table tag in the future, meanwhile, for markdown-gen use table markdown syntax inside text. For html-gen, use html syntax as usual.</p>
-
-<H4>How to add a subscription form to <a href='/'><b><font color='red'>Re</font><font color='black'>A</font><font color='red'>d</font><font color='black'>ABLE human format</font></b></a> document</H4>
-
-<p>This is how easy it is to add, for example, this <a href=''>mailchimp</a> subscription popup form:</p>
-<p><pre class='code-listing'>
-
-&#x3C;script type=&#x22;text/javascript&#x22; src=&#x22;//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js&#x22; data-dojo-config=&#x22;usePlainJson: true, isDebug: false&#x22;&#x3E;&#x3C;/script&#x3E;&#x3C;script type=&#x22;text/javascript&#x22;&#x3E;window.dojoRequire([&#x22;mojo/signup-forms/Loader&#x22;], function(L) { L.start({&#x22;baseUrl&#x22;:&#x22;mc.us20.list-manage.com&#x22;,&#x22;uuid&#x22;:&#x22;363b40a4db743ba4ef5a555a3&#x22;,&#x22;lid&#x22;:&#x22;f99b32278c&#x22;,&#x22;uniqueMethods&#x22;:true}) })&#x3C;/script&#x3E;
-    
-</pre></p>
-<p>just create a text block with the mailchimp code inside:</p>
-<p><pre class='code-listing'>
-
-.text: {
-&#x3C;script type=&#x22;text/javascript&#x22; src=&#x22;//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js&#x22; data-dojo-config=&#x22;usePlainJson: true, isDebug: false&#x22;&#x3E;&#x3C;/script&#x3E;&#x3C;script type=&#x22;text/javascript&#x22;&#x3E;window.dojoRequire([&#x22;mojo/signup-forms/Loader&#x22;], function(L) { L.start({&#x22;baseUrl&#x22;:&#x22;mc.us20.list-manage.com&#x22;,&#x22;uuid&#x22;:&#x22;363b40a4db743ba4ef5a555a3&#x22;,&#x22;lid&#x22;:&#x22;f99b32278c&#x22;,&#x22;uniqueMethods&#x22;:true}) })&#x3C;/script&#x3E;    
-}
-    
-</pre></p>
-<p>the readable <a href='getting-started.read.red'>source</a> of this guide 
-    contains an even more complex subscription form:</p>
-<a href='img/getting-started-03.png'><img src='img/getting-started-03.png' width='100%' height='100%'></a>
-<p><pre class='code-listing'>
-
-Subscribe: [
-    .title: {Subscribe to our mailing list}
-    .sub-title: {To receive update news once a month}
-    .text: {Just click below:
-    &#x3C;br&#x3E;&#x3C;br&#x3E;&#x3C;button id=&#x27;open-popup&#x27; style=&#x27;background:red;color: white;cursor:pointer;font-size: 14px;text-align: center;text-decoration: none;border: none;border-radius: 3px;padding: 13px 32px;font-family:Helvetica Neue,Arial,Helvetica,Verdana,sans-serif&#x27; &#x3E;Subscribe to our mailing list&#x3C;/button&#x3E;
-    }
-    .text: {
-&#x9;&#x3C;script src=&#x22;//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js&#x22;&#x3E;&#x3C;/script&#x3E;
-
-&#x3C;script type=&#x22;text/javascript&#x22; src=&#x22;//s3.amazonaws.com/downloads.mailchimp.com/js/signup-forms/popup/embed.js&#x22; data-dojo-config=&#x22;usePlainJson: true, isDebug: false&#x22;&#x3E;&#x3C;/script&#x3E;
-
-&#x3C;script&#x3E;
-function showMailingPopUp() {
-    require([&#x22;mojo/signup-forms/Loader&#x22;], function(L) { L.start({&#x22;baseUrl&#x22;:&#x22;mc.us20.list-manage.com&#x22;,&#x22;uuid&#x22;:&#x22;363b40a4db743ba4ef5a555a3&#x22;,&#x22;lid&#x22;:&#x22;f99b32278c&#x22;}) })
-    document.cookie = &#x22;MCPopupClosed=; expires=Thu, 01 Jan 1970 00:00:00 UTC&#x22;;
-};
-
-document.getElementById(&#x22;open-popup&#x22;).onclick = function() {showMailingPopUp()};
-&#x3C;/script&#x3E;
-    }
-]
-    
-</pre></p>
-
-<H4>How to add Google Analytics <a href='/'><b><font color='red'>Re</font><font color='black'>A</font><font color='red'>d</font><font color='black'>ABLE human format</font></b></a> document</H4>
-
-<p>Currently adding script into html header is not accessible for content writer. It should be added later during the process of generating the complete html page: we'll see how to in the next future tutorial.
-Don't forget to subscribe to our mailing list to get notified of our tutorial on <b>Google Analytics</b> inclusion. If there are enough demand, we may add create a text /header refinement to be able to add to insert script into header easily.</p>
-
-<H4>Can I split a long file into multiple files</H4>
-
-<p>Readable is made for large documentation or book, so it is part of its spec. To do so, split content into multiple sections wrapped with [] and put each of them in a file, then adapt the build script, like this for example:</p>
-<a href='img/getting-started-04.png'><img src='img/getting-started-04.png' width='100%' height='100%'></a>
-<p><pre class='code-listing'>
-
-do https://readable.red
-
-article: copy []
-foreach file read %parts/ [
-    append article load rejoin [%parts/ file]
-]
-html-gen/output %getting-started.html
-    
-</pre></p>
 
 <H3>Subscribe to our mailing list</H3>
 
