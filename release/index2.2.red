@@ -1,7 +1,7 @@
 Red [
     Title: "ReAdABLE.Human.Format" 
     Description: "ReAdABLE Human Format Library" 
-    UUID: #9ac31017-8373-4cab-ad0b-a3ce4507e0cc
+    UUID: #f61f02b7-1b94-4e4d-8a3f-ef0ef12b61b7
 ] 
     unless value? '.cache [
         __OFFLINE_MODE__: false if value? in system/words '__OFFLINE_MODE__ [
@@ -54,7 +54,7 @@ Red [
             do https://redlang.red/do-trace
         ] 
         >builds: [
-		[0.0.0.2.1.1 {remove image size for html-gen}]
+		[0.0.0.2.1.1 {u}]
             0.0.0.1.1.1 "Initial Build"
         ] 
         if _build [
@@ -99,32 +99,30 @@ Red [
                 response: write/binary/info source [GET [User-Agent: "Red 0.6.3"]] 
                 out: bin-to-string response/3
             ]
-        ] [
-            either lines [
-                if (suffix? source) = %.zip [
-                    return ""
-                ] 
-                switch/default (type?/word source) [file! url! [
-                    out: sysRead/lines source
-                ] 
-                    string! [
-                        out: split source newline
-                    ]
-                ] [
-                    out: sysRead/lines source
+        ] [either lines [
+            if (suffix? source) = %.zip [
+                return ""
+            ] 
+            switch/default (type?/word source) [file! url! [
+                out: sysRead/lines source
+            ] 
+                string! [
+                    out: split source newline
                 ]
             ] [
-                if exists? source [
-                    if error? try [
+                out: sysRead/lines source
+            ]
+        ] [
+            if exists? source [
+                if error? try [
+                    out: sysRead source
+                ] [
+                    if (last source) <> #"/" [source: rejoin [source #"/"] 
                         out: sysRead source
-                    ] [
-                        if (last source) <> #"/" [source: rejoin [source #"/"] 
-                            out: sysRead source
-                        ]
                     ]
                 ]
             ]
-        ] 
+        ]] 
         either source? [
             either clipboard [] [
                 out
@@ -180,7 +178,8 @@ Red [
         value [any-type!]
     ] [type: type?/word get/any value] 
     set to-word rejoin ["--" ">"] none 
-    script-path: system/options/script 
+    script-path: 
+    system/options/script 
     either none? script-path [
         short-filename: "ReAdABLE.Human.Format.red"
     ] [
@@ -288,8 +287,7 @@ Red [
                     use [lines flag flag_line] [lines: .read/lines content 
                         flag: false 
                         forall lines [
-                            line: lines/1 
-                            i: index? lines 
+                            line: lines/1 i: index? lines 
                             if find line "```" [
                                 .replace/all line "    " "" 
                                 flag: not flag either flag [
@@ -311,8 +309,7 @@ Red [
                     forall content-block [
                         i: index? content-block 
                         n: length? content-block 
-                        append content content-block/1 
-                        unless i = n [
+                        append content content-block/1 unless i = n [
                             unless find content newline [
                                 append content newline
                             ]
@@ -339,18 +336,11 @@ Red [
             ] 
                 return false
             ] 
-            normalize-url-block: function [title-with-url] [first-item: title-with-url/1 
-                either url? first-item [
-                    title: title-with-url/2 
-                    url: title-with-url/1
-                ] [
-                    title: title-with-url/1 
-                    url: title-with-url/2 
-                    if issue? url [
-                        url: rejoin [(to-string url) (mold title-with-url/3)]
-                    ]
-                ] return reduce [title url]
-            ] emit-youtube: function [youtube-url-or-id [url! string! word! block!]] [YOUTUBE_WIDTH: 560 
+            normalize-url-block: function [title-with-url] [first-item: title-with-url/1 either url? first-item [
+                title: title-with-url/2 url: title-with-url/1
+            ] [title: title-with-url/1 url: title-with-url/2 if issue? url [
+                url: rejoin [(to-string url) (mold title-with-url/3)]
+            ]] return reduce [title url]] emit-youtube: function [youtube-url-or-id [url! string! word! block!]] [YOUTUBE_WIDTH: 560 
                 YOUTUBE_HEIGHT: 315 
                 YOUTUBE_EMBED_URL_PREFIX: https://www.youtube.com/embed/ 
                 unless none? youtube-url-or-id [
@@ -430,9 +420,7 @@ Red [
         if none? Paragraphs [
             Paragraphs: copy [] 
             forall Article [
-                label: Article/1 
-                value: Article/2 
-                if block? value [
+                label: Article/1 value: Article/2 if block? value [
                     if set-word? label [
                         append Paragraphs label 
                         append/only Paragraphs value
@@ -445,12 +433,9 @@ Red [
         .title title 
         .sub-title sub-title 
         forall Paragraphs-Blocks [
-            Paragraph-Content: Paragraphs-Blocks/1 
-            forall Paragraph-Content [
+            Paragraph-Content: Paragraphs-Blocks/1 forall Paragraph-Content [
                 refresh-screen 
-                label: Paragraph-Content/1 
-                value: Paragraph-Content/2 
-                if (form label) = ".title" [
+                label: Paragraph-Content/1 value: Paragraph-Content/2 if (form label) = ".title" [
                     title: value 
                     .paragraph-title title
                 ] 
@@ -483,9 +468,7 @@ Red [
                 ] 
                 if (((form label) = ".link") or ((form label) = ".url")) [
                     url: value 
-                    either find (form label) "/" [refinements: remove (split (form label) "/") forall refinements [replace/all refinements/1 ":" ""]] [
-                        .link url
-                    ]
+                    either find (form label) "/" [refinements: remove (split (form label) "/") forall refinements [replace/all refinements/1 ":" ""]] [.link url]
                 ] 
                 if (((form label) = ".links") or ((form label) = ".urls")) [
                     links-collection: value 
@@ -575,7 +558,7 @@ Red [
             ] 
                 unless none? image [
                     emit [
-                        "<a href='" image "'>" "<img src='" image "'>" "</a>"
+                        "<a href='" image "'>" "<img src='" image "' width='100%' height='100%'>" "</a>"
                     ]
                 ]
             ] 
@@ -604,18 +587,11 @@ Red [
             ] 
                 return false
             ] 
-            normalize-url-block: function [title-with-url] [first-item: title-with-url/1 
-                either url? first-item [
-                    title: title-with-url/2 
-                    url: title-with-url/1
-                ] [
-                    title: title-with-url/1 
-                    url: title-with-url/2 
-                    if issue? url [
-                        url: rejoin [(to-string url) (mold title-with-url/3)]
-                    ]
-                ] return reduce [title url]
-            ] emit-youtube: function [youtube-url-or-id [url! string! word! block!]] [YOUTUBE_WIDTH: 560 
+            normalize-url-block: function [title-with-url] [first-item: title-with-url/1 either url? first-item [
+                title: title-with-url/2 url: title-with-url/1
+            ] [title: title-with-url/1 url: title-with-url/2 if issue? url [
+                url: rejoin [(to-string url) (mold title-with-url/3)]
+            ]] return reduce [title url]] emit-youtube: function [youtube-url-or-id [url! string! word! block!]] [YOUTUBE_WIDTH: 560 
                 YOUTUBE_HEIGHT: 315 
                 YOUTUBE_EMBED_URL_PREFIX: https://www.youtube.com/embed/ 
                 unless none? youtube-url-or-id [
@@ -690,9 +666,7 @@ Red [
         if none? Paragraphs [
             Paragraphs: copy [] 
             forall Article [
-                label: Article/1 
-                value: Article/2 
-                if block? value [
+                label: Article/1 value: Article/2 if block? value [
                     if set-word? label [
                         append Paragraphs label 
                         append/only Paragraphs value
@@ -705,12 +679,9 @@ Red [
         .title title 
         .sub-title sub-title 
         forall Paragraphs-Blocks [
-            Paragraph-Content: Paragraphs-Blocks/1 
-            forall Paragraph-Content [
+            Paragraph-Content: Paragraphs-Blocks/1 forall Paragraph-Content [
                 refresh-screen 
-                label: Paragraph-Content/1 
-                value: Paragraph-Content/2 
-                if (form label) = ".title" [
+                label: Paragraph-Content/1 value: Paragraph-Content/2 if (form label) = ".title" [
                     title: value 
                     .paragraph-title title
                 ] 
@@ -748,11 +719,8 @@ Red [
                 ] 
                 if (((form label) = ".link") or ((form label) = ".url")) [
                     url: value 
-                    either find (form label) "/" [refinements: remove (split (form label) "/") forall refinements [replace/all refinements/1 ":" ""]] [
-                        .link url
-                    ]
-                ] 
-                if (((form label) = ".links") or ((form label) = ".urls")) [
+                    either find (form label) "/" [refinements: remove (split (form label) "/") forall refinements [replace/all refinements/1 ":" ""]] [.link url]
+                ] if (((form label) = ".links") or ((form label) = ".urls")) [
                     links-collection: value 
                     .links links-collection
                 ] 
